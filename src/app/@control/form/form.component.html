@@ -1,0 +1,18 @@
+<nb-card>
+  <nb-card-header>{{title}}</nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div *ngFor="let field of fields" [class]="getWidth(field.size)">
+          <div class="form-group">
+            <label [for]="field.name" class="label">{{field.label}}</label>
+            <input *ngIf="field.type === 'text'" type="text" nbInput [formControlName]="field.name" fullWidth
+                   id="inputFirstName" [placeholder]="field.label" [readOnly]="!canEdit && !field.canEdit">
+          </div>
+        </div>
+      </div>
+      <button *ngIf="canEdit" [disabled]="formGroup.invalid" type="submit" nbButton>Save</button>
+      <button *ngIf="canEdit" (click)="onReset()" type="reset" nbButton>Cancel</button>
+    </form>
+  </nb-card-body>
+</nb-card>

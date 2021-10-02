@@ -30,4 +30,8 @@
   @include ngx-pace-theme();
 
   @include nb-overrides();
+
+  button[nbButton] {
+    margin: 0.5rem;
+  }
 };
