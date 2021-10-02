@@ -8,6 +8,9 @@
             <label [for]="field.name" class="label">{{field.label}}</label>
             <input *ngIf="field.type === 'text'" type="text" nbInput [formControlName]="field.name" fullWidth
                    id="inputFirstName" [placeholder]="field.label" [readOnly]="!canEdit && !field.canEdit">
+
+            <nb-badge nbInput *ngIf="field.type === 'boolean' && (!canEdit && !field.canEdit)" [text]="getData(field.name)" [status]="getData(field.name)  === true ? 'success' : 'default'"></nb-badge>
+            <nb-toggle nbInput  *ngIf="field.type === 'boolean' && (canEdit === true && field.canEdit === true)" [formControlName]="field.name"></nb-toggle>
           </div>
         </div>
       </div>

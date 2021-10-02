@@ -4,11 +4,11 @@ import {Observable} from 'rxjs';
 import {ApiResponse} from '../model/api-model';
 
 @Injectable({
-  providedIn: `root`,
+  providedIn: `root`
 })
 export class ProviderService {
 
-  private readonly baseUrl: string = 'http://localhost:8080/';
+  private readonly baseUrl: string = 'http://localhost:8080';
 
   constructor(private http: HttpClient) {
   }
@@ -18,7 +18,8 @@ export class ProviderService {
   }
 
   public post(url: string, payload: any): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(url, payload);
+    const endPoint: string = this.baseUrl + url;
+    return this.http.post<ApiResponse>(endPoint, payload);
   }
 
 }
