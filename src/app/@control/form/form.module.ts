@@ -12,6 +12,7 @@ import {
   NbUserModule
 } from '@nebular/theme';
 import {FormsRoutingModule} from '../../pages/forms/forms-routing.module';
+import {ActionModule} from '../action/action.module';
 
 
 
@@ -39,7 +40,8 @@ import {FormsRoutingModule} from '../../pages/forms/forms-routing.module';
     NbIconModule,
     ngFormsModule,
     NbBadgeModule,
-    NbToggleModule
+    NbToggleModule,
+    ActionModule
   ]
 })
 export class FormModule { }
