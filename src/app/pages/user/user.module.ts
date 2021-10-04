@@ -20,6 +20,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { ListUserComponent } from './list-user/list-user.component';
 import { ViewUserComponent } from './view-user/view-user.component';
 import {FormModule} from '../../@control/form/form.module';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {FormModule} from '../../@control/form/form.module';
     UserComponent,
     AddUserComponent,
     ListUserComponent,
-    ViewUserComponent
+    ViewUserComponent,
+    EditUserComponent
   ],
   imports: [
     CommonModule,

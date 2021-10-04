@@ -31,4 +31,8 @@ export class UserService {
     const url: string =  `${this.userURL}/${user.id}/set-state`;
     return this.providerService.post(url, user);
   }
+
+  public updateUser(user: any): Observable<ApiResponse> {
+    return this.providerService.put(this.userURL, user);
+  }
 }

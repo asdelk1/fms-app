@@ -19,8 +19,8 @@
           </div>
         </div>
       </div>
-      <button *ngIf="canEdit" [disabled]="formGroup.invalid" type="submit" nbButton>Save</button>
-      <button *ngIf="canEdit" (click)="onReset()" type="reset" nbButton>Cancel</button>
+      <button *ngIf="canEdit" status="info" [disabled]="formGroup.invalid" type="submit" nbButton>Save</button>
+      <button *ngIf="canEdit"  status="control" (click)="onReset()" type="reset" nbButton>Cancel</button>
     </form>
   </nb-card-body>
 </nb-card>

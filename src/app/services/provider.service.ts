@@ -22,4 +22,9 @@ export class ProviderService {
     return this.http.post<ApiResponse>(endPoint, payload);
   }
 
+  public put(url: string, payload: any): Observable<ApiResponse> {
+    const endPoint: string = this.baseUrl + url;
+    return this.http.put<ApiResponse>(endPoint, payload);
+  }
+
 }
