@@ -4,14 +4,15 @@ import { FormComponent } from './form.component';
 import {FormsModule as ngFormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ThemeModule} from '../../@theme/theme.module';
 import {
-  NbActionsModule,
+  NbActionsModule, NbBadgeModule,
   NbButtonModule,
   NbCardModule,
   NbCheckboxModule, NbDatepickerModule, NbIconModule,
-  NbInputModule, NbRadioModule, NbSelectModule,
+  NbInputModule, NbRadioModule, NbSelectModule, NbToggleModule,
   NbUserModule
 } from '@nebular/theme';
 import {FormsRoutingModule} from '../../pages/forms/forms-routing.module';
+import {ActionModule} from '../action/action.module';
 
 
 
@@ -37,7 +38,10 @@ import {FormsRoutingModule} from '../../pages/forms/forms-routing.module';
     FormsRoutingModule,
     NbSelectModule,
     NbIconModule,
-    ngFormsModule
+    ngFormsModule,
+    NbBadgeModule,
+    NbToggleModule,
+    ActionModule
   ]
 })
 export class FormModule { }
