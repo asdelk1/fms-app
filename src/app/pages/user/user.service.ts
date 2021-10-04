@@ -26,4 +26,9 @@ export class UserService {
     const url: string = `${this.userURL}/${id}`;
     return this.providerService.get(url);
   }
+
+  public deactivateUser(user: any): Observable<ApiResponse> {
+    const url: string =  `${this.userURL}/${user.id}/set-state`;
+    return this.providerService.post(url, user);
+  }
 }
