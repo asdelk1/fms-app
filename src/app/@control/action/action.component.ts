@@ -21,4 +21,8 @@ export class ActionComponent implements OnInit {
     this.settings.execute();
   }
 
+  public getStatus(): string {
+    return this.settings.status ? this.settings.status : 'basic';
+  }
+
 }
