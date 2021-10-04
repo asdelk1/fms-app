@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {OwerpFormModel} from './owerp-form.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {OwerpActionModel} from '../action/owerp-action.model';
 
 @Component({
   selector: 'ngx-owerp-form',
@@ -13,6 +14,8 @@ export class FormComponent implements OnInit, OnChanges {
   public title: string;
   @Input()
   public fields: OwerpFormModel[];
+  @Input()
+  public actions: OwerpActionModel[];
   @Input()
   public data: any;
   @Input()
@@ -48,7 +51,7 @@ export class FormComponent implements OnInit, OnChanges {
   }
 
   public getData(field: string): string {
-    return this.data && this.data[field] ? this.data[field] : '';
+    return this.data && this.data[field] !== undefined ? this.data[field] : '';
   }
 
   public getWidth(size: string): string {
