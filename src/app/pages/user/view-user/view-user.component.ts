@@ -61,10 +61,12 @@ export class ViewUserComponent implements OnInit {
 
   private initActions(): void {
     this.actions = [
-      {name: 'editUser', icon: 'brush-outline', status: 'warning',  execute: this.editUser.bind(this)},
-      {name: 'deactivateUser',
+      {name: 'editUser', icon: 'brush-outline', status: 'warning',  execute: this.editUser.bind(this), mode: 'single'},
+      {
+        name: 'deactivateUser',
         label: this.data['active'] ? 'Deactivate' : 'Set Active',
-        execute: this.switchState.bind(this)}
+        execute: this.switchState.bind(this),
+        mode: 'single'}
     ];
   }
 
