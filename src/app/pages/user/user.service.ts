@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {ProviderService} from '../../services/provider.service';
 import {ApiResponse} from '../../model/api-model';
 import {Observable} from 'rxjs';
@@ -9,7 +8,7 @@ import {Observable} from 'rxjs';
 })
 export class UserService {
 
-  private readonly userURL: string = '/user';
+  private readonly userURL: string = '/admin/users';
 
   constructor(private providerService: ProviderService) {
   }
