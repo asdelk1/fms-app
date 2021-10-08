@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {
   OwerpTableColumn,
   OwerpTableColumnType,
@@ -7,6 +7,7 @@ import {
 import {OwerpActionModel} from '../../../@control/action/owerp-action.model';
 import {UserGroupService} from '../../user-group.service';
 import {ApiResponse} from '../../../model/api-model';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-owerp-list-user-group',
@@ -21,32 +22,33 @@ export class ListUserGroupComponent implements OnInit {
   };
 
   public actions: OwerpActionModel[] = [
-    {name: 'viewGroupDetails', mode: OwerpTableSelectionMode.SINGLE, execute: this.viewDetails}
+    {name: 'viewGroupDetails', mode: OwerpTableSelectionMode.SINGLE, execute: this.viewDetails.bind(this), label: 'Details'}
   ];
 
   public data: any[];
 
   public selectionMode: OwerpTableSelectionMode = OwerpTableSelectionMode.SINGLE;
 
-  constructor(private ugService: UserGroupService) {
+  constructor(private ugService: UserGroupService,
+              private activatedRoute: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit(): void {
-    this.ugService.list().subscribe(this.observer);
+    this.ugService.list().subscribe(
+      (res: ApiResponse) => {
+        this.data = res.data;
+      }
+    );
   }
 
   public onUserGroupCreate(): void {
-    return;
+    this.router.navigate(['add-user-group'], {relativeTo: this.activatedRoute});
   }
 
-
-  public viewDetails(): void {
-    console.log(this);
+  public viewDetails(data: any | any[]): void {
+    const id: string = data[0]['id'];
+    this.router.navigate([id, 'view'], {relativeTo: this.activatedRoute});
   }
- public observer(res: ApiResponse): void {
-
-  this.data = res.data;
-  }
-
 
 }

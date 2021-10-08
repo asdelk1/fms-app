@@ -1,8 +1,9 @@
 <ngx-owerp-table
-[columns]="userGroupColumns"
-[data]="data"
-[actions]="actions"
-[selectionMode]="selectionMode"
-[title]="'User Groups'"
+  [columns]="userGroupColumns"
+  [data]="data"
+  [actions]="actions"
+  [selectionMode]="selectionMode"
+  [title]="'User Groups'"
+  (create)="onUserGroupCreate()"
 >
 </ngx-owerp-table>

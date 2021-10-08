@@ -44,4 +44,4 @@ import {ActionModule} from '../action/action.module';
     ActionModule
   ]
 })
-export class FormModule { }
+export class OwerpFormModule { }

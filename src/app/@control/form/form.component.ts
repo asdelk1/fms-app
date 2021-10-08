@@ -17,13 +17,13 @@ export class FormComponent implements OnInit, OnChanges {
   @Input()
   public actions: OwerpActionModel[];
   @Input()
-  public data: any;
+  public data: any | any[];
   @Input()
   public canEdit: boolean = true;
   @Output()
-  public submit: EventEmitter<any> = new EventEmitter<any>();
+  public saveData: EventEmitter<any> = new EventEmitter<any>();
   @Output()
-  public reset: EventEmitter<void> = new EventEmitter<void>();
+  public cancelForm: EventEmitter<void> = new EventEmitter<void>();
 
   public formGroup: FormGroup;
 
@@ -44,7 +44,7 @@ export class FormComponent implements OnInit, OnChanges {
     if (this.fields && this.fields.length > 0) {
       const formControls: { [key: string]: any } = {};
       this.fields.forEach((f: OwerpFormModel) => {
-        formControls[f.name] = this.fb.control(this.getData(f.name), Validators.required);
+        formControls[f.name] = this.fb.control(this.getData(f.name), f.required ? Validators.required : undefined);
       });
       this.formGroup = this.fb.group(formControls);
     }
@@ -54,7 +54,11 @@ export class FormComponent implements OnInit, OnChanges {
     return this.data && this.data[field] !== undefined ? this.data[field] : '';
   }
 
-  public getWidth(size: string): string {
+  public getWidth(size: string | undefined): string {
+    if (size === undefined) {
+      return 'col-sm-3';
+    }
+
     let colCssClass: string = 'col-sm-';
     switch (size) {
       case 'lg':
@@ -70,11 +74,11 @@ export class FormComponent implements OnInit, OnChanges {
   }
 
   public onSubmit(): void {
-    this.submit.emit(this.formGroup.value);
+    this.saveData.emit(this.formGroup.value);
   }
 
   public onReset(): void {
-    this.reset.emit();
+    this.cancelForm.emit();
   }
 
 }

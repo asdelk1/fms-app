@@ -73,12 +73,7 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   public onUserRowSelect(rows: any[]): void {
-    this.selectedRecords = rows;
-  }
-
-  public getActionSettings(model: OwerpActionModel): OwerpActionModel {
-    model.execute.bind(this.selectedRecords);
-    return model;
+    this.selectedRecords = rows['selected'];
   }
 
   public isVisible(model: OwerpActionModel): boolean {

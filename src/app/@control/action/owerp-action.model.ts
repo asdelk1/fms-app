@@ -3,7 +3,7 @@ export interface OwerpActionModel {
   label?: string;
   icon?: string;
   status?: string;
-  execute: () => void;
+  execute: (data: any | any[]) => void;
   mode: string;
   visible?: (data: any) => boolean;
 }

@@ -10,7 +10,8 @@
         <div class="buttons-row">
           <div *ngFor="let action of actions">
           <ngx-owerp-action
-                            [settings]="getActionSettings(action)"
+                            [settings]="action"
+                            [data]="selectedRecords"
                             *ngIf="isVisible(action)"
           ></ngx-owerp-action>
           </div>

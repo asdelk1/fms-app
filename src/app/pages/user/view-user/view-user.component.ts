@@ -45,8 +45,8 @@ export class ViewUserComponent implements OnInit {
     }
   }
 
-  public switchState(): void {
-    this.userService.deactivateUser(this.data).subscribe(
+  public switchState(data: any | any[]): void {
+    this.userService.deactivateUser(data as any).subscribe(
       (res: ApiResponse) => {
         this.userMessageService.success('State changed successfully');
         this.data = res.data;
@@ -55,8 +55,8 @@ export class ViewUserComponent implements OnInit {
     );
   }
 
-  public editUser(): void {
-    this.router.navigate(['edit', this.data.id], {relativeTo: this.activatedRoute.parent}  );
+  public editUser(data: any | any[]): void {
+    this.router.navigate(['edit', data.id], {relativeTo: this.activatedRoute.parent}  );
   }
 
   private initActions(): void {
