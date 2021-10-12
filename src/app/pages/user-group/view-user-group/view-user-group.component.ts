@@ -82,10 +82,10 @@ export class ViewUserGroupComponent implements OnInit {
 
   ngOnInit(): void {
     const id: string = this.route.snapshot.params['id'];
-    this.loadUsers(id);
+    this.loadData(id);
   }
 
-  public loadUsers(id: string): void {
+  public loadData(id: string): void {
     this.ugs.find(id).pipe(take(1)).subscribe(
       (res: ApiResponse) => {
         this.data = res.data;
@@ -103,7 +103,7 @@ export class ViewUserGroupComponent implements OnInit {
       (res: ApiResponse) => {
         const count: number = data.length;
         this.messageService.success(count + ' users are removed from this group');
-        this.loadUsers(`${this.data['id']}`);
+        this.loadData(`${this.data['id']}`);
       }
     );
   }
@@ -119,12 +119,24 @@ export class ViewUserGroupComponent implements OnInit {
       });
   }
 
-  public grantPermission(permissions: any[]): void {
-    return;
+  public grantPermission(data: any[]): void {
+    const permissions: string[] = data.map((d) => d['name']);
+    this.ugs.grantPermissions(this.data['id'], permissions).pipe(take(1)).subscribe(
+      () => {
+        this.messageService.success('Permissions Granted Successfully.');
+        this.loadData(this.data['id']);
+      }
+    );
   }
 
-  public denyPermission(): void {
-    return;
+  public denyPermission(data: any[]): void {
+    const permissions: string[] = data.map((d) => d['name']);
+    this.ugs.denyPermissions(this.data['id'], permissions).pipe(take(1)).subscribe(
+      () => {
+        this.messageService.success('Permissions Denied Successfully.');
+        this.loadData(this.data['id']);
+      }
+    );
   }
 
   public isDenyActionVisible(data: any): boolean {

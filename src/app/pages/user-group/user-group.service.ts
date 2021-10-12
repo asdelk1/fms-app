@@ -48,6 +48,14 @@ export class UserGroupService {
       });
     return processedPermission;
   }
+
+  public grantPermissions(id: number, permission: string[]) {
+    return this.provider.post(`${this.baseURL}\\${id}\\grant-permissions`, permission);
+  }
+
+  public denyPermissions(id: number, permission: string[]) {
+    return this.provider.post(`${this.baseURL}\\${id}\\deny-permissions`, permission);
+  }
 }
 
 export interface GrantedPermission {
