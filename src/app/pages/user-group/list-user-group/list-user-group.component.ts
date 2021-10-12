@@ -5,7 +5,7 @@ import {
   OwerpTableSelectionMode
 } from '../../../@control/table/owerp-table.model';
 import {OwerpActionModel} from '../../../@control/action/owerp-action.model';
-import {UserGroupService} from '../../user-group.service';
+import {UserGroupService} from '../user-group.service';
 import {ApiResponse} from '../../../model/api-model';
 import {ActivatedRoute, Router} from '@angular/router';
 

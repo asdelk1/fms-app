@@ -5,7 +5,7 @@ export interface OwerpTableColumn {
 
 export interface OwerpColumnDefinition {
   title: string;
-  type: string;
+  type: OwerpTableColumnType;
 }
 
 export enum OwerpTableSelectionMode {
@@ -15,5 +15,6 @@ export enum OwerpTableSelectionMode {
 
 export enum OwerpTableColumnType {
   TEXT = 'string',
-  NUMBER = 'number'
+  NUMBER = 'number',
+  BOOLEAN = 'checkbox'
 }

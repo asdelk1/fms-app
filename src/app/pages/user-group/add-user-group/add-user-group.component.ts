@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {OwerpFormFieldSize, OwerpFormFieldType, OwerpFormModel} from '../../../@control/form/owerp-form.model';
-import {UserGroupService} from '../../user-group.service';
+import {UserGroupService} from '../user-group.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiResponse} from '../../../model/api-model';
 import {UserMessageService} from '../../../services/user-message.service';

@@ -7,6 +7,8 @@ import {OwerpTableModule} from '../../@control/table/owerp-table.module';
 import {AddUserGroupComponent} from './add-user-group/add-user-group.component';
 import {OwerpFormModule} from '../../@control/form/owerp-form.module';
 import { ViewUserGroupComponent } from './view-user-group/view-user-group.component';
+import {NbCardModule, NbTableModule, NbTabsetModule} from '@nebular/theme';
+import { AddUserComponent } from './add-user/add-user.component';
 
 
 @NgModule({
@@ -14,13 +16,16 @@ import { ViewUserGroupComponent } from './view-user-group/view-user-group.compon
     UserGroupComponent,
     ListUserGroupComponent,
     AddUserGroupComponent,
-    ViewUserGroupComponent
+    ViewUserGroupComponent,
+    AddUserComponent
   ],
   imports: [
     CommonModule,
     UserGroupRoutingModule,
     OwerpTableModule,
-    OwerpFormModule
+    OwerpFormModule,
+    NbCardModule,
+    NbTabsetModule
   ]
 })
 export class UserGroupModule { }

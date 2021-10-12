@@ -1,6 +1,11 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {LocalDataSource} from 'ng2-smart-table';
-import {OwerpTableColumn, OwerpTableSelectionMode} from './owerp-table.model';
+import {
+  OwerpColumnDefinition,
+  OwerpTableColumn,
+  OwerpTableColumnType,
+  OwerpTableSelectionMode
+} from './owerp-table.model';
 import {OwerpActionModel} from '../action/owerp-action.model';
 
 @Component({
@@ -25,6 +30,12 @@ export class TableComponent implements OnInit, OnChanges {
   @Input()
   public selectionMode: OwerpTableSelectionMode = OwerpTableSelectionMode.SINGLE;
 
+  @Input()
+  public hideCard: boolean = false;
+
+  @Input()
+  public disableCreate: boolean = false;
+
   @Output()
   public create: EventEmitter<void> = new EventEmitter<void>();
 
@@ -43,6 +54,7 @@ export class TableComponent implements OnInit, OnChanges {
 
     if (changes['data']) {
       this.source = new LocalDataSource(this.data);
+      this.selectedRecords = [];
     }
 
     if (changes['columns']) {
@@ -59,12 +71,14 @@ export class TableComponent implements OnInit, OnChanges {
         addButtonContent: '<i class="nb-plus"></i>'
       },
       actions: {
+        add: !this.disableCreate,
         enable: false,
         edit: false,
         delete: false
       }
     };
-    tableSettings['columns'] = this.columns ? this.columns : {};
+
+    tableSettings['columns'] = this.getTableColumns();
     this.settings = tableSettings;
   }
 
@@ -81,9 +95,43 @@ export class TableComponent implements OnInit, OnChanges {
       return false;
     } else if (model.mode === 'single') {
       return this.selectedRecords.length === 1;
+    } else if (model.visible !== undefined) {
+      return model.visible(this.selectedRecords);
     }
     return true;
   }
 
+  private getTableColumns(): { [columnName: string]: any } {
+    if (!this.columns) {
+      return {};
+    }
+
+    const tableColumns: { [name: string]: any } = {};
+    Object.keys(this.columns).forEach(
+      (columnName: string) => {
+        const column: OwerpColumnDefinition = this.columns[columnName];
+        const colDef: any = {};
+        colDef['title'] = column.title;
+        if (column.type === OwerpTableColumnType.TEXT || column.type === OwerpTableColumnType.NUMBER) {
+          colDef['type'] = 'string';
+        } else if (column.type === OwerpTableColumnType.BOOLEAN) {
+          colDef['type'] = 'checkbox';
+          colDef['filter'] = {
+            type: 'checkbox',
+            config: {
+              class: '',
+              true: 'true',
+              false: 'false',
+              resetText: 'clear'
+            }
+          };
+        }
+
+        tableColumns[columnName] = colDef;
+      }
+    );
+    return tableColumns;
+
+  }
 
 }
