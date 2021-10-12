@@ -1,0 +1,12 @@
+<div class="lists">
+  <nb-card class="list-card">
+    <nb-card-header>{{title}}</nb-card-header>
+    <nb-card-body>
+      <nb-list *ngIf="displayAttr">
+        <nb-list-item *ngFor="let item of items" (click)="selectItem.emit(item)">
+          {{ getDisplayValue(item) }}
+        </nb-list-item>
+      </nb-list>
+    </nb-card-body>
+  </nb-card>
+</div>

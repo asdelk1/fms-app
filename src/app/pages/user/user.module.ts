@@ -21,6 +21,7 @@ import { ListUserComponent } from './list-user/list-user.component';
 import { ViewUserComponent } from './view-user/view-user.component';
 import {OwerpFormModule} from '../../@control/form/owerp-form.module';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import {OwerpListModule} from '../../@control/list/owerp-list.module';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { EditUserComponent } from './edit-user/edit-user.component';
     NbRadioModule,
     NbButtonModule,
     ReactiveFormsModule,
-    OwerpFormModule
+    OwerpFormModule,
+    OwerpListModule
   ]
 })
 export class UserModule { }

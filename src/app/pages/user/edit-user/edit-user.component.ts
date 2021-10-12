@@ -28,7 +28,7 @@ export class EditUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const userId: number = +this.activatedRoute.snapshot.params['id'];
+    const userId: string = this.activatedRoute.snapshot.params['id'];
     if (userId) {
       this.userService.getUser(userId).subscribe(
         (res: ApiResponse) => {
