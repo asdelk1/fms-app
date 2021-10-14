@@ -20,6 +20,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Users',
         link: '/pages/users'
+      },
+      {
+        title: 'User Groups',
+        link: '/pages/user-groups'
       }
     ]
   },

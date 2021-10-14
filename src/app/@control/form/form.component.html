@@ -2,7 +2,7 @@
   <nb-card-header>{{title}}
   <div class="row" *ngIf="actions && actions.length > 0 && !canEdit">
     <div class="col-lg-12">
-      <ngx-owerp-action *ngFor="let action of actions" [settings]="action"></ngx-owerp-action>
+      <ngx-owerp-action *ngFor="let action of actions" [settings]="action" [data]="data"></ngx-owerp-action>
     </div>
   </div></nb-card-header>
   <nb-card-body>
@@ -19,8 +19,8 @@
           </div>
         </div>
       </div>
-      <button *ngIf="canEdit" [disabled]="formGroup.invalid" type="submit" nbButton>Save</button>
-      <button *ngIf="canEdit" (click)="onReset()" type="reset" nbButton>Cancel</button>
+      <button *ngIf="canEdit" status="info" [disabled]="formGroup.invalid" type="submit" nbButton>Save</button>
+      <button *ngIf="canEdit"  status="control" (click)="onReset()" type="reset" nbButton>Cancel</button>
     </form>
   </nb-card-body>
 </nb-card>

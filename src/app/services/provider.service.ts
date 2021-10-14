@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ApiResponse} from '../model/api-model';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: `root`
@@ -20,6 +21,11 @@ export class ProviderService {
   public post(url: string, payload: any): Observable<ApiResponse> {
     const endPoint: string = this.baseUrl + url;
     return this.http.post<ApiResponse>(endPoint, payload);
+  }
+
+  public put(url: string, payload: any): Observable<ApiResponse> {
+    const endPoint: string = this.baseUrl + url;
+    return this.http.put<ApiResponse>(endPoint, payload);
   }
 
 }

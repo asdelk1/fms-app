@@ -10,6 +10,8 @@ export class ActionComponent implements OnInit {
 
   @Input()
   public settings: OwerpActionModel;
+  @Input()
+  public data: any | any[];
 
   constructor() {
   }
@@ -18,7 +20,11 @@ export class ActionComponent implements OnInit {
   }
 
   public onClick(): void {
-    this.settings.execute();
+    this.settings.execute(this.data);
+  }
+
+  public getStatus(): string {
+    return this.settings.status ? this.settings.status : 'basic';
   }
 
 }

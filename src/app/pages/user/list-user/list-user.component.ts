@@ -51,7 +51,7 @@ export class ListUserComponent implements OnInit {
         title: 'E-mail',
         type: 'string'
       },
-      age: {
+      epfNo: {
         title: 'Epf No',
         type: 'string'
       },
