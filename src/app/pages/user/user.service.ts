@@ -9,6 +9,7 @@ import {Observable} from 'rxjs';
 export class UserService {
 
   private readonly userURL: string = '/admin/users';
+  private _userPermissions: Set<string> | undefined = undefined;
 
   constructor(private providerService: ProviderService) {
   }
@@ -38,4 +39,22 @@ export class UserService {
   public getUserGroups(id: string): Observable<ApiResponse> {
     return this.providerService.get(`${this.userURL}/${id}/user-groups`);
   }
+
+  public refreshUserPermissions(username: String): void {
+    const url: string = `${this.userURL}/${username}/permissions`;
+    this.providerService.get(url).subscribe(
+      (res: ApiResponse) => {
+        this._userPermissions = new Set<string>(res.data);
+      }
+    );
+  }
+
+  public getUserPermissions(): Set<string> | undefined {
+    if (this._userPermissions === undefined) {
+      return undefined;
+    }
+
+    return this._userPermissions;
+  }
+
 }
