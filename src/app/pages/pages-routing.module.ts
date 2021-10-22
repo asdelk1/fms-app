@@ -73,12 +73,17 @@ const routes: Routes = [{
     {
       path: 'users',
       loadChildren: () => import('./user/user.module')
-        .then(m => UserModule)
+        .then(m => m.UserModule)
     },
     {
       path: 'user-groups',
       loadChildren: () => import('./user-group/user-group.module')
-        .then(m => UserGroupModule)
+        .then(m => m.UserGroupModule)
+    },
+    {
+      path: 'user-login-history',
+      loadChildren: () => import('./user-login-history/user-login-history.module')
+        .then(m => m.UserLoginHistoryModule)
     },
     {
       path: '',

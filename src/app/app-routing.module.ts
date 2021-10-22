@@ -1,19 +1,20 @@
-import { ExtraOptions, RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
+import {ExtraOptions, RouterModule, Routes} from '@angular/router';
+import {NgModule} from '@angular/core';
 import {
   NbAuthComponent,
   NbLoginComponent,
   NbLogoutComponent,
-  NbRegisterComponent,
   NbRequestPasswordComponent,
-  NbResetPasswordComponent,
+  NbResetPasswordComponent
 } from '@nebular/auth';
 import {AuthGuard} from './guards/auth-guard';
+import {UserPermissionResolver} from './guards/user-permission-resolver';
 
 export const routes: Routes = [
   {
     path: 'pages',
     canActivate: [AuthGuard],
+    resolve: [UserPermissionResolver],
     loadChildren: () => import('./pages/pages.module')
       .then(m => m.PagesModule),
   },
