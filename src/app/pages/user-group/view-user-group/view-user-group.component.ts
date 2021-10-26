@@ -4,7 +4,7 @@ import {GrantedPermission, UserGroupService} from '../user-group.service';
 import {ApiResponse} from '../../../model/api-model';
 import {OwerpFormFieldSize, OwerpFormFieldType, OwerpFormModel} from '../../../@control/form/owerp-form.model';
 import {
-  OwerpTableColumn,
+  OwerpTableColumns,
   OwerpTableColumnType,
   OwerpTableSelectionMode
 } from '../../../@control/table/owerp-table.model';
@@ -32,7 +32,7 @@ export class ViewUserGroupComponent implements OnInit {
     }
   ];
 
-  public userColumns: OwerpTableColumn = {
+  public userColumns: OwerpTableColumns = {
     'username': {title: 'Username', type: OwerpTableColumnType.TEXT},
     'firstName': {title: 'First Name', type: OwerpTableColumnType.TEXT},
     'lastName': {title: 'Last Name', type: OwerpTableColumnType.TEXT}
@@ -47,7 +47,7 @@ export class ViewUserGroupComponent implements OnInit {
     }
   ];
 
-  public permissionColumns: OwerpTableColumn = {
+  public permissionColumns: OwerpTableColumns = {
     'name': {title: 'Name', type: OwerpTableColumnType.TEXT},
     'isGranted': {title: 'Granted', type: OwerpTableColumnType.BOOLEAN}
   };

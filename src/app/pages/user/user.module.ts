@@ -22,6 +22,7 @@ import { ViewUserComponent } from './view-user/view-user.component';
 import {OwerpFormModule} from '../../@control/form/owerp-form.module';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import {OwerpListModule} from '../../@control/list/owerp-list.module';
+import {OwerpTableModule} from '../../@control/table/owerp-table.module';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import {OwerpListModule} from '../../@control/list/owerp-list.module';
     NbButtonModule,
     ReactiveFormsModule,
     OwerpFormModule,
-    OwerpListModule
+    OwerpListModule,
+    OwerpTableModule
   ]
 })
 export class UserModule { }

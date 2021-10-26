@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {
-  OwerpTableColumn,
+  OwerpTableColumns,
   OwerpTableColumnType,
   OwerpTableSelectionMode
 } from '../../../@control/table/owerp-table.model';
@@ -16,7 +16,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class ListUserGroupComponent implements OnInit {
 
-  public userGroupColumns: OwerpTableColumn = {
+  public userGroupColumns: OwerpTableColumns = {
     name: {title: 'Name', type: OwerpTableColumnType.TEXT},
     description: {title: 'Description', type: OwerpTableColumnType.TEXT}
   };

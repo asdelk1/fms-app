@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {
-  OwerpTableColumn,
+  OwerpTableColumns,
   OwerpTableColumnType,
   OwerpTableSelectionMode
 } from '../../../@control/table/owerp-table.model';
@@ -18,7 +18,7 @@ import {UserMessageService} from '../../../services/user-message.service';
 })
 export class AddUserComponent implements OnInit {
 
-  public userColumns: OwerpTableColumn = {
+  public userColumns: OwerpTableColumns = {
     'username': {title: 'Username', type: OwerpTableColumnType.TEXT},
     'firstName': {title: 'First Name', type: OwerpTableColumnType.TEXT},
     'lastName': {title: 'Last Name', type: OwerpTableColumnType.TEXT}
