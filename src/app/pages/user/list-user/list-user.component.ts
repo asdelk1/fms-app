@@ -1,9 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {LocalDataSource} from 'ng2-smart-table';
 import {NbDialogService} from '@nebular/theme';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../user.service';
 import {ApiResponse} from '../../../model/api-model';
+import {
+  OwerpTableColumns,
+  OwerpTableColumnType,
+  OwerpTableSelectionMode
+} from '../../../@control/table/owerp-table.model';
+import {OwerpActionModel} from '../../../@control/action/owerp-action.model';
 
 @Component({
   selector: 'ngx-list-user',
@@ -12,67 +17,46 @@ import {ApiResponse} from '../../../model/api-model';
 })
 export class ListUserComponent implements OnInit {
 
-  settings = {
-    selectMode: 'multi',
-    mode: 'external',
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>'
+  public selectionMode: OwerpTableSelectionMode = OwerpTableSelectionMode.MULTI;
+  public actions: OwerpActionModel[] = [
+    {
+      name: 'viewUserDetails',
+      label: 'Details',
+      mode: OwerpTableSelectionMode.SINGLE,
+      execute: this.viewDetails.bind(this)
+    }
+  ];
+  public columns: OwerpTableColumns = {
+    id: {
+      title: 'ID',
+      type: OwerpTableColumnType.TEXT
     },
-    edit: {
-      editButtonContent: '<i class="nb-paper-plane"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>'
+    firstName: {
+      title: 'First Name',
+      type: OwerpTableColumnType.TEXT
     },
-    actions: {
-      enable: false,
-      edit: false,
-      delete: false
+    lastName: {
+      title: 'Last Name',
+      type: OwerpTableColumnType.TEXT
     },
-    columns: {
-      id: {
-        title: 'ID',
-        type: 'number'
-      },
-      firstName: {
-        title: 'First Name',
-        type: 'string'
-      },
-      lastName: {
-        title: 'Last Name',
-        type: 'string'
-      },
-      username: {
-        title: 'Username',
-        type: 'string'
-      },
-      email: {
-        title: 'E-mail',
-        type: 'string'
-      },
-      epfNo: {
-        title: 'Epf No',
-        type: 'string'
-      },
-      active: {
-        title: 'Active',
-        type: 'checkbox',
-        filter: {
-          type: 'checkbox',
-          config: {
-            class: '',
-            true: 'true',
-            false: 'false',
-            resetText: 'clear'
-          }
-        }
-      }
+    username: {
+      title: 'Username',
+      type: OwerpTableColumnType.TEXT
+    },
+    email: {
+      title: 'E-mail',
+      type: OwerpTableColumnType.TEXT
+    },
+    epfNo: {
+      title: 'Epf No',
+      type: OwerpTableColumnType.TEXT
+    },
+    active: {
+      title: 'Active',
+      type: OwerpTableColumnType.BOOLEAN
     }
   };
-
-  source: LocalDataSource = new LocalDataSource();
-  public selectedRows: any = [];
+  public data: any[] = [];
 
   constructor(private dialogService: NbDialogService,
               private router: Router,
@@ -83,8 +67,7 @@ export class ListUserComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUsers().subscribe(
       (res: ApiResponse) => {
-        const userData: any[] = res.data;
-        this.source.load(userData);
+        this.data = res.data;
       }
     );
   }
@@ -93,12 +76,8 @@ export class ListUserComponent implements OnInit {
     this.router.navigate(['add-user'], {relativeTo: this.activatedRoute});
   }
 
-  public rowSelect(rows: any) {
-    this.selectedRows = rows.selected;
-  }
-
-  public viewDetails(): void {
-    this.router.navigate(['view', this.selectedRows[0].id], {relativeTo: this.activatedRoute});
+  public viewDetails(rows: any | any[]): void {
+    this.router.navigate(['view', rows[0].id], {relativeTo: this.activatedRoute});
   }
 
 }

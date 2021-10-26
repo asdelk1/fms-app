@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {OwerpTableColumn, OwerpTableColumnType} from '../../../@control/table/owerp-table.model';
+import {OwerpTableColumns, OwerpTableColumnType} from '../../../@control/table/owerp-table.model';
 import {UserLoginHistoryService} from '../../user-login-history.service';
 import {ApiResponse} from '../../../model/api-model';
 
@@ -10,7 +10,7 @@ import {ApiResponse} from '../../../model/api-model';
 })
 export class ListHistoryComponent implements OnInit {
 
-  public columns: OwerpTableColumn = {
+  public columns: OwerpTableColumns = {
     id: {title: 'Id', type: OwerpTableColumnType.TEXT},
     user: {title: 'User', type: OwerpTableColumnType.TEXT},
     ip: {title: 'IP Address', type: OwerpTableColumnType.TEXT},

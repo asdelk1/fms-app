@@ -1,27 +1,8 @@
-<nb-card>
-  <nb-card-header>
-    Users
-  </nb-card-header>
-
-  <nb-card-body>
-
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="buttons-row">
-          <button *ngIf="selectedRows.length === 1" nbButton shape="semi-round" (click)="viewDetails()">Details
-          </button>
-          <button *ngIf="selectedRows.length > 0" nbButton shape="semi-round">Set Deactivate
-          </button>
-        </div>
-      </div>
-    </div>
-
-
-    <ng2-smart-table
-      [settings]="settings"
-      [source]="source"
-      (create)="onUserCreate()"
-      (userRowSelect)="rowSelect($event)">
-    </ng2-smart-table>
-  </nb-card-body>
-</nb-card>
+<ngx-owerp-table
+  [title]="'Users'"
+  [selectionMode]="selectionMode"
+  [columns]="columns"
+  [data]="data"
+  [actions]="actions"
+  (create)="onUserCreate()"
+></ngx-owerp-table>

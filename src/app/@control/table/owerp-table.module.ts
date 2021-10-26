@@ -3,12 +3,14 @@ import {CommonModule} from '@angular/common';
 import {ActionModule} from '../action/action.module';
 import {TableComponent} from './table.component';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
-import {NbCardModule} from '@nebular/theme';
+import {NbBadgeModule, NbCardModule} from '@nebular/theme';
+import { OwerpBooleanColumnComponent } from './owerp-boolean-column/owerp-boolean-column.component';
 
 
 @NgModule({
   declarations: [
-    TableComponent
+    TableComponent,
+    OwerpBooleanColumnComponent
   ],
   exports: [
     TableComponent
@@ -17,6 +19,7 @@ import {NbCardModule} from '@nebular/theme';
     CommonModule,
     ActionModule,
     NbCardModule,
+    NbBadgeModule,
     Ng2SmartTableModule
   ]
 })

@@ -2,11 +2,12 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 import {LocalDataSource} from 'ng2-smart-table';
 import {
   OwerpColumnDefinition,
-  OwerpTableColumn,
+  OwerpTableColumns,
   OwerpTableColumnType,
   OwerpTableSelectionMode
 } from './owerp-table.model';
 import {OwerpActionModel} from '../action/owerp-action.model';
+import {OwerpBooleanColumnComponent} from './owerp-boolean-column/owerp-boolean-column.component';
 
 @Component({
   selector: 'ngx-owerp-table',
@@ -22,7 +23,7 @@ export class TableComponent implements OnInit, OnChanges {
   public data: any[];
 
   @Input()
-  public columns: OwerpTableColumn = {};
+  public columns: OwerpTableColumns = {};
 
   @Input()
   public actions: OwerpActionModel[];
@@ -115,7 +116,8 @@ export class TableComponent implements OnInit, OnChanges {
         if (column.type === OwerpTableColumnType.TEXT || column.type === OwerpTableColumnType.NUMBER) {
           colDef['type'] = 'string';
         } else if (column.type === OwerpTableColumnType.BOOLEAN) {
-          colDef['type'] = 'checkbox';
+          colDef['type'] = 'custom';
+          colDef['renderComponent'] = OwerpBooleanColumnComponent;
           colDef['filter'] = {
             type: 'checkbox',
             config: {

@@ -1,5 +1,5 @@
 
-export interface OwerpTableColumn {
+export interface OwerpTableColumns {
   [columnName: string]: OwerpColumnDefinition;
 }
 
