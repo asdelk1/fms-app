@@ -23,6 +23,7 @@ export class UserPermissionResolver implements Resolve<any> {
     if (this.doRefresh) {
       this.doRefresh = false;
       this.userService.refreshUserPermissions(this.username);
+      this.userService.fetchLoggedInUser(this.username);
     }
   }
 

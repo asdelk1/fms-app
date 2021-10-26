@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ProviderService} from '../../services/provider.service';
 import {ApiResponse} from '../../model/api-model';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
+import {LoggedInUser} from './user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,10 @@ export class UserService {
 
   private readonly userURL: string = '/admin/users';
   private _userPermissions: Set<string> | undefined = undefined;
+  private _loggedInUser$: Subject<LoggedInUser> = new Subject<LoggedInUser>();
+  public get loggedInUser$(): Observable<LoggedInUser> {
+    return this._loggedInUser$.asObservable();
+  }
 
   constructor(private providerService: ProviderService) {
   }
@@ -55,6 +60,21 @@ export class UserService {
     }
 
     return this._userPermissions;
+  }
+
+  public fetchLoggedInUser(username: string): void {
+    const url: string = `${this.userURL}/username/${username}`;
+    this.providerService.get(url).subscribe(
+      (res: ApiResponse) => {
+        const loggedInUser: LoggedInUser = new LoggedInUser(
+          res.data['firstName'],
+          res.data['lastName'],
+          res.data['username'],
+          res.data['email']
+        );
+        this._loggedInUser$.next(loggedInUser);
+      }
+    );
   }
 
 }
