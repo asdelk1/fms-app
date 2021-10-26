@@ -27,10 +27,10 @@ export class UserMessageService {
   }
 
   public error(message): void {
-    this.config['status'] = 'error';
+    this.config['status'] = 'danger';
     this.toastrService.show(
       message,
-      'SUCCESS',
+      'ERROR',
       this.config);
   }
 

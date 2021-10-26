@@ -120,20 +120,26 @@ export const NB_CORE_PROVIDERS = [
         login: {
           endpoint: '/generate-token',
           method: 'post'
+        },
+        requestPass: {
+          endpoint: '/generate-password-reset-token',
+          method: 'post'
         }
       })
     ],
     forms: {
       login: {
-        socialLinks: socialLinks,
         strategy: 'jwt',
-        rememberMe: true,
+        rememberMe: false,
         email: 'username'
       },
       register: {
         socialLinks: socialLinks
-
       },
+      requestPass: {
+        strategy: 'jwt',
+      },
+
       validation: {
         email: {
           required: false,
