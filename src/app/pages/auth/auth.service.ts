@@ -17,4 +17,9 @@ export class AuthService {
     const url: string = `${this.baseURL}/generate-password-reset-token`;
     return this.providerService.post(url, email);
   }
+
+  public resetPassword(token: string, password: string): Observable<ApiResponse> {
+    const url: string = `${this.baseURL}/reset-password`;
+    return this.providerService.post(url, {token: token, password: password});
+  }
 }
