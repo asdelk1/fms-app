@@ -5,8 +5,6 @@ import {PagesComponent} from './pages.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {ECommerceComponent} from './e-commerce/e-commerce.component';
 import {NotFoundComponent} from './miscellaneous/not-found/not-found.component';
-import {UserModule} from './user/user.module';
-import {UserGroupModule} from './user-group/user-group.module';
 
 const routes: Routes = [{
   path: '',
@@ -84,6 +82,11 @@ const routes: Routes = [{
       path: 'user-login-history',
       loadChildren: () => import('./user-login-history/user-login-history.module')
         .then(m => m.UserLoginHistoryModule)
+    },
+    {
+      path: 'customer-types',
+      loadChildren: () => import('./customer-type/customer-type.module')
+        .then(m => m.CustomerTypeModule)
     },
     {
       path: '',
