@@ -74,7 +74,9 @@ export class FormComponent implements OnInit, OnChanges {
   }
 
   public onSubmit(): void {
-    this.saveData.emit(this.formGroup.value);
+    const data: Object = this.data['id'] ?
+      Object.assign({id: this.data['id']}, this.formGroup.value) : this.formGroup.value;
+    this.saveData.emit(data);
   }
 
   public onReset(): void {

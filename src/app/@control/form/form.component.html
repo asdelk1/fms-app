@@ -15,9 +15,11 @@
             <input *ngIf="field.type === 'text'" type="text" nbInput [formControlName]="field.name" fullWidth
                    id="inputFirstName" [placeholder]="field.label" [readOnly]="!canEdit && !field.canEdit">
           </div>
-            <nb-badge style="position: relative; top: -20%" nbInput *ngIf="field.type === 'boolean' && (!canEdit && !field.canEdit)"
+            <nb-badge style="position: relative; top: -20%" nbInput *ngIf="field.type === 'boolean' && (!canEdit || (canEdit && !field.canEdit))"
                       [text]="getData(field.name)"
-                      [status]="getData(field.name)  === true ? 'success' : 'danger'"></nb-badge>
+                      [status]="getData(field.name)  === true ? 'success' : 'danger'">
+
+            </nb-badge>
             <nb-toggle nbInput *ngIf="field.type === 'boolean' && (canEdit === true && field.canEdit === true)"
                        [formControlName]="field.name"></nb-toggle>
 

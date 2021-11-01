@@ -18,7 +18,7 @@ export class CustomerTypeDetailsComponent implements OnInit {
     {name: 'typeCode', type: OwerpFormFieldType.TEXT, canEdit: false, label: 'Code'},
     {name: 'typeName', type: OwerpFormFieldType.TEXT, canEdit: false, label: 'Name'},
     {name: 'remarks', type: OwerpFormFieldType.TEXT, canEdit: false, label: 'Remarks', size: OwerpFormFieldSize.MEDIUM},
-    {name: 'status', type: OwerpFormFieldType.BOOLEAN, canEdit: false, label: 'Code'}
+    {name: 'status', type: OwerpFormFieldType.BOOLEAN, canEdit: true, label: 'Status'}
   ];
   public actions: OwerpActionModel[] = [
     {
@@ -30,6 +30,7 @@ export class CustomerTypeDetailsComponent implements OnInit {
   ];
   public data: any;
   public canEdit: boolean;
+  private mode: 'update' | 'new' = 'new';
 
   constructor(private service: CustomerTypeService,
               private router: Router,
@@ -42,21 +43,36 @@ export class CustomerTypeDetailsComponent implements OnInit {
     if (paramMap.has('id')) {
       this.fetchType(paramMap.get('id'));
       this.canEdit = this.route.snapshot.url.length === 2;
+      this.mode = 'update';
     } else {
       this.canEdit = true;
+      this.mode = 'new';
     }
   }
 
   public saveCustomerType(data: any) {
-    this.service.create(data).subscribe(
-      (res: ApiResponse) => {
-        this.ums.success('Customer Type Created Successfully');
-        this.cancelForm();
-      });
+
+    if (this.mode === 'new') {
+      this.service.create(data).pipe(take(1)).subscribe(
+        (res: ApiResponse) => {
+          this.ums.success('Customer Type Created Successfully');
+          this.cancelForm();
+        });
+    } else {
+      this.service.update(data, this.data['id']).pipe(take(1)).subscribe(
+        (res: ApiResponse) => {
+          this.ums.success('Customer Type Saved Successfully');
+          this.cancelForm();
+        });
+    }
   }
 
   public cancelForm(): void {
-    this.router.navigate(['customer-types'], {relativeTo: this.route.parent.parent});
+    if (this.mode === 'new') {
+      this.router.navigate(['customer-types'], {relativeTo: this.route.parent.parent});
+    } else {
+      this.router.navigate(['customer-types', this.data['id']], {relativeTo: this.route.parent.parent});
+    }
   }
 
   private fetchType(id: string): void {
