@@ -1,10 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NbMediaBreakpointsService, NbMenuItem, NbMenuService, NbSidebarService, NbThemeService} from '@nebular/theme';
-
-import { UserData } from '../../../@core/data/users';
-import { LayoutService } from '../../../@core/utils';
-import { map, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import {LayoutService} from '../../../@core/utils';
+import {map, takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 import {UserService} from '../../../pages/user/user.service';
 import {LoggedInUser} from '../../../pages/user/user.model';
 
