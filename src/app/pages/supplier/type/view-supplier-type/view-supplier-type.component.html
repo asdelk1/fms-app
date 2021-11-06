@@ -1,7 +1,8 @@
 <ngx-owerp-form
 [title]="'Supplier Type'"
-[canEdit]="false"
+[canEdit]="mode !== 'read-only'"
 [data]="data"
+[actions]="actions"
 (cancelForm)="cancel()"
 (saveData)="saveType($event)"
 [fields]="fields"

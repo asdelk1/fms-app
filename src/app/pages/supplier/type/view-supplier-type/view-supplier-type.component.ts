@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {OwerpFormFieldSize, OwerpFormFieldType, OwerpFormModel} from '../../../../@control/form/owerp-form.model';
 import {ApiResponse} from '../../../../model/api-model';
 import {UserMessageService} from '../../../../services/user-message.service';
+import {OwerpActionModel} from '../../../../@control/action/owerp-action.model';
 
 @Component({
   selector: 'ngx-owerp-view-supplier-type',
@@ -23,10 +24,17 @@ export class ViewSupplierTypeComponent implements OnInit {
       size: OwerpFormFieldSize.LARGE,
       required: false,
       canEdit: true
-    },
-
+    }
   ];
-  public mode: 'create' | 'update' | 'read-only' = 'read-only';
+  public actions: OwerpActionModel[] = [
+    {
+      name: 'editSupplierType',
+      status: 'warning',
+      icon: 'brush-outline',
+      execute: this.editSupplierType.bind(this)
+    }
+  ];
+  public mode: 'create' | 'update' | 'read-only' = 'create';
   public data: any;
   public id: string = '';
 
@@ -50,7 +58,11 @@ export class ViewSupplierTypeComponent implements OnInit {
   }
 
   public cancel(): void {
-    this.router.navigateByUrl('/pages/suppliers/types');
+    if (this.mode === 'create') {
+      this.router.navigateByUrl('/pages/suppliers/types');
+    } else {
+      this.router.navigate([this.id], {relativeTo: this.route.parent});
+    }
   }
 
   public saveType(data: any): void {
@@ -68,5 +80,9 @@ export class ViewSupplierTypeComponent implements OnInit {
         this.data = res.data;
       }
     );
+  }
+
+  public editSupplierType(): void {
+    this.router.navigate(['edit'], {relativeTo: this.route});
   }
 }
