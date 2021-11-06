@@ -89,6 +89,11 @@ const routes: Routes = [{
         .then(m => m.CustomerTypeModule)
     },
     {
+      path: 'suppliers',
+      loadChildren: () => import('./supplier/supplier.module')
+        .then(m => m.SupplierModule)
+    },
+    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full'
