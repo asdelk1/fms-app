@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {OwerpFormModel} from './owerp-form.model';
+import {OwerpFormFieldType, OwerpFormModel} from './owerp-form.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {OwerpActionModel} from '../action/owerp-action.model';
 
@@ -44,14 +44,17 @@ export class FormComponent implements OnInit, OnChanges {
     if (this.fields && this.fields.length > 0) {
       const formControls: { [key: string]: any } = {};
       this.fields.forEach((f: OwerpFormModel) => {
-        formControls[f.name] = this.fb.control(this.getData(f.name), f.required ? Validators.required : undefined);
+        formControls[f.name] = this.fb.control(this.getData(f), f.required ? Validators.required : undefined);
       });
       this.formGroup = this.fb.group(formControls);
     }
   }
 
-  public getData(field: string): string {
-    return this.data && this.data[field] !== undefined ? this.data[field] : '';
+  public getData(field: OwerpFormModel): string {
+    if (field.type === OwerpFormFieldType.BOOLEAN) {
+      return this.data && this.data[field.name] ? 'true' : 'false';
+    }
+    return this.data && this.data[field.name] !== undefined ? this.data[field.name] : '';
   }
 
   public getWidth(size: string | undefined): string {
@@ -74,7 +77,7 @@ export class FormComponent implements OnInit, OnChanges {
   }
 
   public onSubmit(): void {
-    const data: Object = this.data['id'] ?
+    const data: Object = this.data && this.data['id'] ?
       Object.assign({id: this.data['id']}, this.formGroup.value) : this.formGroup.value;
     this.saveData.emit(data);
   }
