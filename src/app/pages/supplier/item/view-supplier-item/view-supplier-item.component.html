@@ -1,0 +1,9 @@
+<ngx-owerp-form
+  [title]="'Supplier Item'"
+  [canEdit]="mode !== 'read-only'"
+  [data]="data"
+  [actions]="actions"
+  (cancelForm)="cancel()"
+  (saveData)="saveItem($event)"
+  [fields]="fields"
+></ngx-owerp-form>

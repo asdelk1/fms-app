@@ -8,13 +8,17 @@ import {OwerpTableModule} from '../../@control/table/owerp-table.module';
 import {ActionModule} from '../../@control/action/action.module';
 import { ViewSupplierTypeComponent } from './type/view-supplier-type/view-supplier-type.component';
 import {OwerpFormModule} from '../../@control/form/owerp-form.module';
+import { ListSupplierItemComponent } from './item/list-supplier-item/list-supplier-item.component';
+import { ViewSupplierItemComponent } from './item/view-supplier-item/view-supplier-item.component';
 
 
 @NgModule({
   declarations: [
     SupplierComponent,
     ListSupplierTypeComponent,
-    ViewSupplierTypeComponent
+    ViewSupplierTypeComponent,
+    ListSupplierItemComponent,
+    ViewSupplierItemComponent
   ],
   imports: [
     CommonModule,
