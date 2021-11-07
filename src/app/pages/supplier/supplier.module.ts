@@ -10,6 +10,9 @@ import { ViewSupplierTypeComponent } from './type/view-supplier-type/view-suppli
 import {OwerpFormModule} from '../../@control/form/owerp-form.module';
 import { ListSupplierItemComponent } from './item/list-supplier-item/list-supplier-item.component';
 import { ViewSupplierItemComponent } from './item/view-supplier-item/view-supplier-item.component';
+import { ListSupplierComponent } from './list-supplier/list-supplier.component';
+import { CreateSupplierComponent } from './create-supplier/create-supplier.component';
+import { ViewSupplierComponent } from './view-supplier/view-supplier.component';
 
 
 @NgModule({
@@ -18,7 +21,10 @@ import { ViewSupplierItemComponent } from './item/view-supplier-item/view-suppli
     ListSupplierTypeComponent,
     ViewSupplierTypeComponent,
     ListSupplierItemComponent,
-    ViewSupplierItemComponent
+    ViewSupplierItemComponent,
+    ListSupplierComponent,
+    CreateSupplierComponent,
+    ViewSupplierComponent
   ],
   imports: [
     CommonModule,

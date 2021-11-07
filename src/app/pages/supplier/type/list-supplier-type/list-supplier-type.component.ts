@@ -6,8 +6,8 @@ import {
 } from '../../../../@control/table/owerp-table.model';
 import {OwerpActionModel} from '../../../../@control/action/owerp-action.model';
 import {ActivatedRoute, Router} from '@angular/router';
-import {SupplierService} from '../../supplier.service';
 import {ApiResponse} from '../../../../model/api-model';
+import {SupplierTypeService} from '../../supplier-type.service';
 
 @Component({
   selector: 'ngx-owerp-list-supplier-type',
@@ -35,7 +35,7 @@ export class ListSupplierTypeComponent implements OnInit {
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private service: SupplierService) {
+              private service: SupplierTypeService) {
   }
 
   ngOnInit(): void {

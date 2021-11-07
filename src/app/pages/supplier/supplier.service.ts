@@ -2,31 +2,27 @@ import {Injectable} from '@angular/core';
 import {ProviderService} from '../../services/provider.service';
 import {Observable} from 'rxjs';
 import {ApiResponse} from '../../model/api-model';
-import {take} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SupplierService {
 
-  private readonly baseURL: string = '/supplier';
+  private readonly baseURL: string = '/suppliers';
 
   constructor(private provider: ProviderService) {
   }
 
-  public getTypes(): Observable<ApiResponse> {
-    return this.provider.get(this.baseURL + '/types').pipe(take(1));
+  public fetchAll(): Observable<ApiResponse> {
+    return this.provider.get(this.baseURL);
   }
 
-  public getType(id: string): Observable<ApiResponse> {
-    return this.provider.get(this.baseURL + '/types/' + id).pipe(take(1));
+  public fetch(id: string) {
+    return this.provider.get(`${this.baseURL}/${id}`);
   }
 
-  public createType(type: any): Observable<ApiResponse> {
-    return this.provider.post(this.baseURL + '/types', type);
+  public save(supplier: any): Observable<ApiResponse> {
+    return this.provider.post(this.baseURL, supplier);
   }
 
-  public updateType(id: string, type: any): Observable<ApiResponse> {
-    return this.provider.put(this.baseURL + '/types/' + id, type);
-  }
 }

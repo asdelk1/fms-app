@@ -8,7 +8,7 @@ import {ProviderService} from '../../services/provider.service';
 })
 export class SupplierItemService {
 
-  private readonly baseURL: string = '/supplier/items';
+  private readonly baseURL: string = '/suppliers/items';
 
 
   constructor(private provider: ProviderService) {
