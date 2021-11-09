@@ -103,6 +103,18 @@ export class FormComponent implements OnInit, OnChanges {
   public onSubmit(): void {
     const data: Object = this.data && this.data['id'] ?
       Object.assign({id: this.data['id']}, this.formGroup.value) : this.formGroup.value;
+
+    if (this.autoCompleteData && Object.keys(this.autoCompleteData).length > 0) {
+      Object.keys(this.autoCompleteData).forEach(
+        (complexType: string) => {
+          if (data[complexType] !== undefined || data[complexType] !== null) {
+            const typeId: number = +data[complexType];
+            data[complexType] = {id: typeId};
+          }
+        }
+      );
+    }
+
     this.saveData.emit(data);
   }
 

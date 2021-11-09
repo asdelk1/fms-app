@@ -19,6 +19,7 @@ export interface OwerpAutoCompleteOption {
 
 export enum OwerpFormFieldType {
   TEXT = 'text',
+  NUMBER = 'number',
   BOOLEAN = 'boolean',
   AUTOCOMPLETE = 'autocomplete'
 }

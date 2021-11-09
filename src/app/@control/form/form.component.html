@@ -12,7 +12,8 @@
         <div *ngFor="let field of fields" [class]="getWidth(field.size)">
           <div class="form-group">
             <label [for]="field.name" class="label">{{field.label}}</label>
-            <input *ngIf="field.type === 'text'" type="text" nbInput [formControlName]="field.name" fullWidth
+            <input *ngIf="field.type === 'text' || field.type === 'number'" type="text" nbInput [formControlName]="field.name" fullWidth
+                   [type]="field.type"
                    [placeholder]="field.label" [readOnly]="!canEdit || (canEdit &&!field.canEdit)">
 
             <div *ngIf="field.type === 'autocomplete'">

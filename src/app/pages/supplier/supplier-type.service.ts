@@ -23,10 +23,14 @@ export class SupplierTypeService {
   }
 
   public createType(type: any): Observable<ApiResponse> {
-    return this.provider.post(this.baseURL + '/types', type);
+    return this.provider.post(this.baseURL, type);
   }
 
   public updateType(id: string, type: any): Observable<ApiResponse> {
     return this.provider.put(this.baseURL + '/' + id, type);
+  }
+
+  public fetchActiveTypes(): Observable<ApiResponse> {
+    return this.provider.get(`${this.baseURL}/active`);
   }
 }

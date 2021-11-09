@@ -1,9 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {OwerpFormFieldSize, OwerpFormFieldType, OwerpFormModel} from '../../../@control/form/owerp-form.model';
+import {
+  OwerpAutoCompleteDataModel,
+  OwerpFormFieldSize,
+  OwerpFormFieldType,
+  OwerpFormModel
+} from '../../../@control/form/owerp-form.model';
 import {SupplierService} from '../supplier.service';
 import {Router} from '@angular/router';
 import {ApiResponse} from '../../../model/api-model';
 import {UserMessageService} from '../../../services/user-message.service';
+import {SupplierTypeService} from '../supplier-type.service';
 
 @Component({
   selector: 'ngx-owerp-create-supplier',
@@ -21,6 +27,17 @@ export class CreateSupplierComponent implements OnInit {
       required: true,
       canEdit: true,
       size: OwerpFormFieldSize.SMALL
+    },
+    {
+      name: 'type',
+      type: OwerpFormFieldType.AUTOCOMPLETE,
+      label: 'Type',
+      required: true,
+      canEdit: true,
+      size: OwerpFormFieldSize.SMALL,
+      autoComplete: {
+        value: 'id', label: 'typeName'
+      }
     },
     {
       name: 'address',
@@ -128,21 +145,25 @@ export class CreateSupplierComponent implements OnInit {
     },
     {
       name: 'creditLimit',
-      type: OwerpFormFieldType.TEXT,
+      type: OwerpFormFieldType.NUMBER,
       label: 'Credit Limit',
       required: true,
       canEdit: true,
       size: OwerpFormFieldSize.SMALL
     }
   ];
-public data: any = {};
+
+  public autoCompleteData: OwerpAutoCompleteDataModel = {};
+  public data: any = {};
 
   constructor(private service: SupplierService,
               private toast: UserMessageService,
-              private router: Router) {
+              private router: Router,
+              private supplierTypeService: SupplierTypeService) {
   }
 
   ngOnInit(): void {
+    this.fetchSupplierTypes();
   }
 
   public saveSupplier(data: any): void {
@@ -156,6 +177,13 @@ public data: any = {};
 
   public cancel(): void {
     this.router.navigateByUrl('/pages/suppliers');
+  }
+
+  public fetchSupplierTypes(): void {
+    this.supplierTypeService.fetchActiveTypes().subscribe(
+      (res: ApiResponse) => {
+        this.autoCompleteData['type'] = res.data;
+      });
   }
 
 }

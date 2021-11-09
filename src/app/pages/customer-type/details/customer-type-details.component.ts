@@ -15,9 +15,9 @@ import {OwerpActionModel} from '../../../@control/action/owerp-action.model';
 export class CustomerTypeDetailsComponent implements OnInit {
 
   public fields: OwerpFormModel[] = [
-    {name: 'typeCode', type: OwerpFormFieldType.TEXT, canEdit: false, label: 'Code'},
-    {name: 'typeName', type: OwerpFormFieldType.TEXT, canEdit: false, label: 'Name'},
-    {name: 'remarks', type: OwerpFormFieldType.TEXT, canEdit: false, label: 'Remarks', size: OwerpFormFieldSize.MEDIUM},
+    {name: 'typeCode', type: OwerpFormFieldType.TEXT, canEdit: true, label: 'Code'},
+    {name: 'typeName', type: OwerpFormFieldType.TEXT, canEdit: true, label: 'Name'},
+    {name: 'remarks', type: OwerpFormFieldType.TEXT, canEdit: true, label: 'Remarks', size: OwerpFormFieldSize.MEDIUM},
     {name: 'status', type: OwerpFormFieldType.BOOLEAN, canEdit: true, label: 'Status'}
   ];
   public actions: OwerpActionModel[] = [
