@@ -4,7 +4,7 @@ import { FormComponent } from './form.component';
 import {FormsModule as ngFormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ThemeModule} from '../../@theme/theme.module';
 import {
-  NbActionsModule, NbBadgeModule,
+  NbActionsModule, NbAutocompleteModule, NbBadgeModule,
   NbButtonModule,
   NbCardModule,
   NbCheckboxModule, NbDatepickerModule, NbIconModule,
@@ -41,6 +41,7 @@ import {ActionModule} from '../action/action.module';
     ngFormsModule,
     NbBadgeModule,
     NbToggleModule,
+    NbAutocompleteModule,
     ActionModule
   ]
 })
