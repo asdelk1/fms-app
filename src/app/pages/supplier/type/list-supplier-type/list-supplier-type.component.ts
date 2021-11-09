@@ -18,9 +18,9 @@ export class ListSupplierTypeComponent implements OnInit {
 
   public cols: OwerpTableColumns = {
     typeCode: {title: 'Code', type: OwerpTableColumnType.TEXT},
-    typeName: {title: 'Code', type: OwerpTableColumnType.TEXT},
-    remarks: {title: 'Code', type: OwerpTableColumnType.TEXT},
-    status: {title: 'Code', type: OwerpTableColumnType.BOOLEAN}
+    typeName: {title: 'Name', type: OwerpTableColumnType.TEXT},
+    remarks: {title: 'Remarks', type: OwerpTableColumnType.TEXT},
+    status: {title: 'Status', type: OwerpTableColumnType.BOOLEAN}
   };
   public selectionMode: OwerpTableSelectionMode = OwerpTableSelectionMode.SINGLE;
   public actions: OwerpActionModel[] = [

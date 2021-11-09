@@ -11,7 +11,6 @@ import {ViewSupplierComponent} from './view-supplier/view-supplier.component';
 const routes: Routes = [
   {path: '', component: ListSupplierComponent},
   {path: 'create', component: CreateSupplierComponent},
-  {path: ':id', component: ViewSupplierComponent},
   {path: 'types', component: ListSupplierTypeComponent},
   {path: 'types/create', component: ViewSupplierTypeComponent},
   {path: 'types/:id', component: ViewSupplierTypeComponent, data: {mode: 'read-only'}},
@@ -20,6 +19,7 @@ const routes: Routes = [
   {path: 'items/create', component: ViewSupplierItemComponent},
   {path: 'items/:id', component: ViewSupplierItemComponent, data: {mode: 'read-only'}},
   {path: 'items/:id/edit', component: ViewSupplierItemComponent, data: {mode: 'update'}},
+  {path: ':id', component: ViewSupplierComponent},
 ];
 
 @NgModule({
