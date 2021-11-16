@@ -19,7 +19,8 @@ export class ListSupplierComponent implements OnInit {
   public cols: OwerpTableColumns = {
     code: {title: 'Code', type: OwerpTableColumnType.TEXT},
     name: {title: 'Name', type: OwerpTableColumnType.TEXT},
-    type: {title: 'Type', type: OwerpTableColumnType.TEXT}
+    type: {title: 'Type', type: OwerpTableColumnType.TEXT},
+    status: {title: 'Status', type: OwerpTableColumnType.BOOLEAN}
   };
 
   public selectionMode: OwerpTableSelectionMode = OwerpTableSelectionMode.SINGLE;
@@ -53,9 +54,10 @@ export class ListSupplierComponent implements OnInit {
         if (data.length > 0) {
           this.data = data.map((record: any) => {
             return {
+              id: record['id'],
               name: record['name'],
               code: record['code'],
-              type: `${record['type']['name']}(${record['type']['code']})`
+              type: `${record['type']['typeName']}(${record['type']['typeCode']})`
             };
           });
         } else {

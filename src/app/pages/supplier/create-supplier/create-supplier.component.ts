@@ -6,7 +6,7 @@ import {
   OwerpFormModel
 } from '../../../@control/form/owerp-form.model';
 import {SupplierService} from '../supplier.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ApiResponse} from '../../../model/api-model';
 import {UserMessageService} from '../../../services/user-message.service';
 import {SupplierTypeService} from '../supplier-type.service';
@@ -38,6 +38,14 @@ export class CreateSupplierComponent implements OnInit {
       autoComplete: {
         value: 'id', label: 'typeName'
       }
+    },
+    {
+      name: 'status',
+      type: OwerpFormFieldType.BOOLEAN,
+      label: 'Status',
+      required: true,
+      canEdit: true,
+      size: OwerpFormFieldSize.SMALL
     },
     {
       name: 'address',
@@ -155,14 +163,25 @@ export class CreateSupplierComponent implements OnInit {
 
   public autoCompleteData: OwerpAutoCompleteDataModel = {};
   public data: any = {};
+  private mode: 'create' | 'update' = 'create';
 
   constructor(private service: SupplierService,
               private toast: UserMessageService,
               private router: Router,
+              private route: ActivatedRoute,
               private supplierTypeService: SupplierTypeService) {
   }
 
   ngOnInit(): void {
+    if (this.route.snapshot.data['mode']) {
+      this.mode = this.route.snapshot.data['mode'];
+    }
+
+    if (this.mode && this.mode === 'update') {
+      const id: string = this.route.snapshot.paramMap.get('id');
+      this.loadData(id);
+    }
+
     this.fetchSupplierTypes();
   }
 
@@ -183,7 +202,18 @@ export class CreateSupplierComponent implements OnInit {
     this.supplierTypeService.fetchActiveTypes().subscribe(
       (res: ApiResponse) => {
         this.autoCompleteData['type'] = res.data;
+        this.autoCompleteData = Object.assign({}, this.autoCompleteData);
       });
+  }
+
+  private loadData(id: string): void {
+    this.service.fetch(id).subscribe(
+      (res: ApiResponse) => {
+        const supplier: any = res.data;
+        supplier['type'] = res.data['type']['id'];
+        this.data = supplier;
+      }
+    );
   }
 
 }

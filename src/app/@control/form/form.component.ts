@@ -49,7 +49,7 @@ export class FormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['data']) {
+    if (changes['data'] || changes['autoCompleteData']) {
       this.render();
     }
   }
@@ -143,6 +143,23 @@ export class FormComponent implements OnInit, OnChanges {
       this.autoCompleteOptionsChange.next(filteredOptions);
     }
     return filteredOptions;
+  }
+
+  public getAutoCompleteLabel(field: OwerpFormModel): (value: any) => string {
+    return (value: any) => {
+
+      if (!this.autoCompleteData || !this.autoCompleteData[field.name]) {
+        return value;
+      }
+
+      let label: string = value;
+      const autoCompleteData: any[] = this.autoCompleteData[field.name];
+      const record: any | undefined = autoCompleteData.find((d) => d[field.autoComplete.value] === value);
+      if (record) {
+        label = record[field.autoComplete.label];
+      }
+      return label;
+    };
   }
 
 }

@@ -17,11 +17,11 @@
                    [placeholder]="field.label" [readOnly]="!canEdit || (canEdit &&!field.canEdit)">
 
             <div *ngIf="field.type === 'autocomplete'">
-              <input type="text" nbInput [formControlName]="field.name" fullWidth
+              <input type="text" nbInput [formControl]="formGroup.controls[field.name]" fullWidth
                      [placeholder]="field.label" [readOnly]="!canEdit || (canEdit &&!field.canEdit)"
                      [nbAutocomplete]="autoControl">
 
-              <nb-autocomplete #autoControl>
+              <nb-autocomplete #autoControl [handleDisplayFn]="getAutoCompleteLabel(field)">
                 <nb-option *ngFor="let option of autoCompleteOptions$ | async" [value]="option.value">
                   {{ option.label }}
                 </nb-option>
