@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {SupplierService} from '../../supplier.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {OwerpFormFieldSize, OwerpFormFieldType, OwerpFormModel} from '../../../../@control/form/owerp-form.model';
 import {ApiResponse} from '../../../../model/api-model';
 import {UserMessageService} from '../../../../services/user-message.service';
 import {OwerpActionModel} from '../../../../@control/action/owerp-action.model';
+import {SupplierTypeService} from '../../supplier-type.service';
 
 @Component({
   selector: 'ngx-owerp-view-supplier-type',
@@ -38,7 +38,7 @@ export class ViewSupplierTypeComponent implements OnInit {
   public data: any;
   public id: string = '';
 
-  constructor(private service: SupplierService,
+  constructor(private service: SupplierTypeService,
               private ums: UserMessageService,
               private router: Router,
               private route: ActivatedRoute) {

@@ -12,16 +12,32 @@
         <div *ngFor="let field of fields" [class]="getWidth(field.size)">
           <div class="form-group">
             <label [for]="field.name" class="label">{{field.label}}</label>
-            <input *ngIf="field.type === 'text'" type="text" nbInput [formControlName]="field.name" fullWidth
-                   id="inputFirstName" [placeholder]="field.label" [readOnly]="!canEdit || (canEdit &&!field.canEdit)">
-          </div>
-            <nb-badge style="position: relative; top: -20%" nbInput *ngIf="field.type === 'boolean' && (!canEdit || (canEdit && !field.canEdit))"
-                      [text]="getData(field)"
-                      [status]="getData(field)  === 'true' ? 'success' : 'danger'">
+            <input *ngIf="field.type === 'text' || field.type === 'number'" type="text" nbInput [formControlName]="field.name" fullWidth
+                   [type]="field.type"
+                   [placeholder]="field.label" [readOnly]="!canEdit || (canEdit &&!field.canEdit)">
 
-            </nb-badge>
-            <nb-toggle nbInput *ngIf="field.type === 'boolean' && (canEdit === true && field.canEdit === true)"
-                       [formControlName]="field.name"></nb-toggle>
+            <div *ngIf="field.type === 'autocomplete'">
+              <input type="text" nbInput [formControl]="formGroup.controls[field.name]" fullWidth
+                     [placeholder]="field.label" [readOnly]="!canEdit || (canEdit &&!field.canEdit)"
+                     [nbAutocomplete]="autoControl">
+
+              <nb-autocomplete #autoControl [handleDisplayFn]="getAutoCompleteLabel(field)">
+                <nb-option *ngFor="let option of autoCompleteOptions$ | async" [value]="option.value">
+                  {{ option.label }}
+                </nb-option>
+
+              </nb-autocomplete>
+            </div>
+
+          </div>
+          <nb-badge style="position: relative; top: -20%" nbInput
+                    *ngIf="field.type === 'boolean' && (!canEdit || (canEdit && !field.canEdit))"
+                    [text]="getData(field)"
+                    [status]="getData(field)  === 'true' ? 'success' : 'danger'">
+
+          </nb-badge>
+          <nb-toggle nbInput *ngIf="field.type === 'boolean' && (canEdit === true && field.canEdit === true)"
+                     [formControlName]="field.name"></nb-toggle>
 
 
         </div>

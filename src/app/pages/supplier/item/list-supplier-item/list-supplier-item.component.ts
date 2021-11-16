@@ -7,20 +7,19 @@ import {
 import {OwerpActionModel} from '../../../../@control/action/owerp-action.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiResponse} from '../../../../model/api-model';
-import {SupplierTypeService} from '../../supplier-type.service';
+import {SupplierItemService} from '../../supplier-item.service';
 
 @Component({
-  selector: 'ngx-owerp-list-supplier-type',
-  templateUrl: './list-supplier-type.component.html',
-  styleUrls: ['./list-supplier-type.component.css']
+  selector: 'ngx-owerp-list-supplier-item',
+  templateUrl: './list-supplier-item.component.html',
+  styleUrls: ['./list-supplier-item.component.css']
 })
-export class ListSupplierTypeComponent implements OnInit {
+export class ListSupplierItemComponent implements OnInit {
 
   public cols: OwerpTableColumns = {
-    typeCode: {title: 'Code', type: OwerpTableColumnType.TEXT},
-    typeName: {title: 'Name', type: OwerpTableColumnType.TEXT},
-    remarks: {title: 'Remarks', type: OwerpTableColumnType.TEXT},
-    status: {title: 'Status', type: OwerpTableColumnType.BOOLEAN}
+    name: {title: 'Name', type: OwerpTableColumnType.TEXT},
+    description: {title: 'Description', type: OwerpTableColumnType.TEXT},
+    status: {title: 'Code', type: OwerpTableColumnType.BOOLEAN}
   };
   public selectionMode: OwerpTableSelectionMode = OwerpTableSelectionMode.SINGLE;
   public actions: OwerpActionModel[] = [
@@ -35,11 +34,11 @@ export class ListSupplierTypeComponent implements OnInit {
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private service: SupplierTypeService) {
+              private service: SupplierItemService) {
   }
 
   ngOnInit(): void {
-    this.service.getTypes().subscribe(
+    this.service.fetchAll().subscribe(
       (res: ApiResponse) => {
         this.data = res.data;
       }
@@ -47,7 +46,7 @@ export class ListSupplierTypeComponent implements OnInit {
   }
 
   public onCreate(): void {
-    this.router.navigateByUrl('/pages/suppliers/types/create');
+    this.router.navigateByUrl('/pages/suppliers/items/create');
   }
 
   public viewDetails(rows: any | any[]): void {
