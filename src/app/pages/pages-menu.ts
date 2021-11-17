@@ -62,8 +62,12 @@ export const MENU_ITEMS: OwerpMenuItem[] = [
   {title: 'Master Data',
   children: [
     {
-      title: 'Currency Type',
+      title: 'Currency Types',
       link: '/pages/master-data/currency-types'
+    },
+    {
+      title: 'Payment Methods',
+      link: '/pages/master-data/payment-methods'
     }
   ]},
   {

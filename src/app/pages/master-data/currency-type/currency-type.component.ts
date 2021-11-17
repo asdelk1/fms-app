@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'currency-type',
+  selector: 'ngx-owerp-currency-type',
   templateUrl: './currency-type.component.html',
   styleUrls: ['./currency-type.component.css']
 })

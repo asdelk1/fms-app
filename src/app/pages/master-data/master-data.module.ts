@@ -7,6 +7,9 @@ import {MasterDataRoutingModule} from './master-data-routing.module';
 import {OwerpTableModule} from '../../@control/table/owerp-table.module';
 import {OwerpFormModule} from '../../@control/form/owerp-form.module';
 import {ActionModule} from '../../@control/action/action.module';
+import { ListPaymentMethodsComponent } from './payment-method/list-payment-methods/list-payment-methods.component';
+import { ViewPaymentMethodsComponent } from './payment-method/view-payment-methods/view-payment-methods.component';
+import { MasterDataComponent } from './master-data.component';
 
 
 
@@ -14,7 +17,10 @@ import {ActionModule} from '../../@control/action/action.module';
   declarations: [
     CurrencyTypeComponent,
     ListCurrencyTypesComponent,
-    ViewCurrencyTypesComponent
+    ViewCurrencyTypesComponent,
+    ListPaymentMethodsComponent,
+    ViewPaymentMethodsComponent,
+    MasterDataComponent
   ],
   imports: [
     CommonModule,
