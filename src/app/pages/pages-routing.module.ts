@@ -94,6 +94,11 @@ const routes: Routes = [{
         .then(m => m.SupplierModule)
     },
     {
+      path: 'master-data',
+      loadChildren: () => import('./master-data/master-data.module')
+        .then(m => m.MasterDataModule)
+    },
+    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full'

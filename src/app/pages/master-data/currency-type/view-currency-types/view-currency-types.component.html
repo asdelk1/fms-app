@@ -1,0 +1,9 @@
+<ngx-owerp-form
+[title]="'Currency Type'"
+[data]="data"
+[actions]="actions"
+[canEdit]="mode !== 'view'"
+[fields]="fields"
+(saveData)="save($event)"
+(cancelForm)="cancel()"
+></ngx-owerp-form>
