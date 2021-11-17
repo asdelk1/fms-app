@@ -68,6 +68,10 @@ export const MENU_ITEMS: OwerpMenuItem[] = [
     {
       title: 'Payment Methods',
       link: '/pages/master-data/payment-methods'
+    },
+    {
+      title: 'Payment Terms',
+      link: '/pages/master-data/payment-terms'
     }
   ]},
   {

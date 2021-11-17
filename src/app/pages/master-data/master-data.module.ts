@@ -10,6 +10,8 @@ import {ActionModule} from '../../@control/action/action.module';
 import { ListPaymentMethodsComponent } from './payment-method/list-payment-methods/list-payment-methods.component';
 import { ViewPaymentMethodsComponent } from './payment-method/view-payment-methods/view-payment-methods.component';
 import { MasterDataComponent } from './master-data.component';
+import { ViewPaymentTermsComponent } from './payment-terms/view-payment-terms/view-payment-terms.component';
+import { ListPaymentTermsComponent } from './payment-terms/list-payment-terms/list-payment-terms.component';
 
 
 
@@ -20,7 +22,9 @@ import { MasterDataComponent } from './master-data.component';
     ViewCurrencyTypesComponent,
     ListPaymentMethodsComponent,
     ViewPaymentMethodsComponent,
-    MasterDataComponent
+    MasterDataComponent,
+    ViewPaymentTermsComponent,
+    ListPaymentTermsComponent
   ],
   imports: [
     CommonModule,
