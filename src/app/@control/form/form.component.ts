@@ -110,6 +110,8 @@ export class FormComponent implements OnInit, OnChanges {
           if (data[complexType] !== undefined || data[complexType] !== null) {
             const typeId: number = +data[complexType];
             data[complexType] = {id: typeId};
+          } else {
+            data[complexType] = {};
           }
         }
       );

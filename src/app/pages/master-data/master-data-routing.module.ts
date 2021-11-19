@@ -6,6 +6,8 @@ import {ListPaymentMethodsComponent} from './payment-method/list-payment-methods
 import {ViewPaymentMethodsComponent} from './payment-method/view-payment-methods/view-payment-methods.component';
 import {ListPaymentTermsComponent} from './payment-terms/list-payment-terms/list-payment-terms.component';
 import {ViewPaymentTermsComponent} from './payment-terms/view-payment-terms/view-payment-terms.component';
+import {ListTaxTypesComponent} from './tax-types/list-tax-types/list-tax-types.component';
+import {ViewTaxTypesComponent} from './tax-types/view-tax-types/view-tax-types.component';
 
 const routes: Routes = [
   {path: 'currency-types', component: ListCurrencyTypesComponent},
@@ -21,7 +23,12 @@ const routes: Routes = [
   {path: 'payment-terms', component: ListPaymentTermsComponent},
   {path: 'payment-terms/create', component: ViewPaymentTermsComponent, data: {mode: 'create'}},
   {path: 'payment-terms/:id/edit', component: ViewPaymentTermsComponent, data: {mode: 'edit'}},
-  {path: 'payment-terms/:id', component: ViewPaymentTermsComponent, data: {mode: 'view'}}
+  {path: 'payment-terms/:id', component: ViewPaymentTermsComponent, data: {mode: 'view'}},
+
+  {path: 'tax-types', component: ListTaxTypesComponent},
+  {path: 'tax-types/create', component: ViewTaxTypesComponent, data: {mode: 'create'}},
+  {path: 'tax-types/:id/edit', component: ViewTaxTypesComponent, data: {mode: 'edit'}},
+  {path: 'tax-types/:id', component: ViewTaxTypesComponent, data: {mode: 'view'}}
 ];
 
 @NgModule({

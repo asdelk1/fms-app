@@ -7,28 +7,27 @@ import {
 import {OwerpActionModel} from '../../../../@control/action/owerp-action.model';
 import {Router} from '@angular/router';
 import {ApiResponse} from '../../../../model/api-model';
-import {PaymentTermsService} from '../payment-terms.service';
-import {TaxTypesService} from '../../tax-types/tax-types.service';
+import {TaxTypesService} from '../tax-types.service';
 
 @Component({
-  selector: 'ngx-owerp-list-payment-terms',
-  templateUrl: './list-payment-terms.component.html',
-  styleUrls: ['./list-payment-terms.component.css']
+  selector: 'ngx-owerp-list-tax-types',
+  templateUrl: './list-tax-types.component.html',
+  styleUrls: ['./list-tax-types.component.css']
 })
-export class ListPaymentTermsComponent implements OnInit {
+export class ListTaxTypesComponent implements OnInit {
 
   public columns: OwerpTableColumns = {
     id: {title: 'Id', type: OwerpTableColumnType.TEXT},
-    term: {title: 'Term (Days)', type: OwerpTableColumnType.TEXT},
+    taxCode: {title: 'Tax Code', type: OwerpTableColumnType.TEXT},
     description: {title: 'Description', type: OwerpTableColumnType.TEXT},
-    discount: {title: 'Discount (%)', type: OwerpTableColumnType.TEXT},
-    discountDatesBefore: {title: 'Discount if paid within (Days)', type: OwerpTableColumnType.TEXT},
+    taxRate: {title: 'Rate (%)', type: OwerpTableColumnType.TEXT},
+    controlAccount: {title: 'Control Account', type: OwerpTableColumnType.TEXT},
     status: {title: 'Status', type: OwerpTableColumnType.BOOLEAN}
   };
 
   public actions: OwerpActionModel[] = [
     {
-      name: 'viewPaymentTermsDetails',
+      name: 'viewTaxTypeDetails',
       label: 'Details',
       execute: this.viewDetails.bind(this),
       mode: OwerpTableSelectionMode.SINGLE

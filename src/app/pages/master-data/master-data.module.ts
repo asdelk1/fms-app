@@ -12,6 +12,8 @@ import { ViewPaymentMethodsComponent } from './payment-method/view-payment-metho
 import { MasterDataComponent } from './master-data.component';
 import { ViewPaymentTermsComponent } from './payment-terms/view-payment-terms/view-payment-terms.component';
 import { ListPaymentTermsComponent } from './payment-terms/list-payment-terms/list-payment-terms.component';
+import { ListTaxTypesComponent } from './tax-types/list-tax-types/list-tax-types.component';
+import { ViewTaxTypesComponent } from './tax-types/view-tax-types/view-tax-types.component';
 
 
 
@@ -24,7 +26,9 @@ import { ListPaymentTermsComponent } from './payment-terms/list-payment-terms/li
     ViewPaymentMethodsComponent,
     MasterDataComponent,
     ViewPaymentTermsComponent,
-    ListPaymentTermsComponent
+    ListPaymentTermsComponent,
+    ListTaxTypesComponent,
+    ViewTaxTypesComponent
   ],
   imports: [
     CommonModule,
