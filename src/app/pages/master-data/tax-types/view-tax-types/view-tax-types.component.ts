@@ -117,11 +117,9 @@ export class ViewTaxTypesComponent implements OnInit {
   }
 
   private fetchLedgerAccount(): void {
-    this.autoCompleteData['controlAccount'] = [];
-    this.autoCompleteData = Object.assign({}, this.autoCompleteData);
     this.lac.fetchActive().subscribe(
       (res: ApiResponse) => {
-        this.autoCompleteData['controlAccount'] = [];
+        this.autoCompleteData['controlAccount'] = res.data;
         this.autoCompleteData = Object.assign({}, this.autoCompleteData);
       }
     );
