@@ -1,0 +1,9 @@
+<ngx-owerp-form
+  [title]="'Accounting Period'"
+  [actions]="actions"
+  [data]="data"
+  [fields]="fields"
+  [canEdit]="mode !== 'view'"
+  (cancelForm)="cancel()"
+  (saveData)="save($event)"
+></ngx-owerp-form>

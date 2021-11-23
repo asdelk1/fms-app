@@ -84,6 +84,10 @@ export const MENU_ITEMS: OwerpMenuItem[] = [
     {
       title: 'Cost Centers',
       link: '/pages/master-data/cost-centers'
+    },
+    {
+      title: 'Accounting Periods',
+      link: '/pages/master-data/accounting-periods'
     }
   ]},
   {

@@ -42,7 +42,8 @@ import {ActionModule} from '../action/action.module';
     NbBadgeModule,
     NbToggleModule,
     NbAutocompleteModule,
-    ActionModule
+    ActionModule,
+    NbDatepickerModule
   ]
 })
 export class OwerpFormModule { }

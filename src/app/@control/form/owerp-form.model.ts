@@ -26,7 +26,8 @@ export enum OwerpFormFieldType {
   NUMBER = 'number',
   BOOLEAN = 'boolean',
   AUTOCOMPLETE = 'autocomplete',
-  RADIO = 'radio'
+  RADIO = 'radio',
+  DATE = 'date'
 }
 
 export enum OwerpFormFieldSize {

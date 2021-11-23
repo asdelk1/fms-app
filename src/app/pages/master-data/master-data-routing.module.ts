@@ -12,6 +12,8 @@ import {ListTaxGroupsComponent} from './tax-groups/list-tax-groups/list-tax-grou
 import {ViewTaxGroupsComponent} from './tax-groups/view-tax-groups/view-tax-groups.component';
 import {ListCostCenterComponent} from './cost-center/list-cost-center/list-cost-center.component';
 import {ViewCostCenterComponent} from './cost-center/view-cost-center/view-cost-center.component';
+import {ListAccountingPeriodComponent} from './accouting-period/list-accounting-period/list-accounting-period.component';
+import {ViewAccountingPeriodComponent} from './accouting-period/view-accounting-period/view-accounting-period.component';
 
 const routes: Routes = [
   {path: 'currency-types', component: ListCurrencyTypesComponent},
@@ -42,7 +44,12 @@ const routes: Routes = [
   {path: 'cost-centers', component: ListCostCenterComponent},
   {path: 'cost-centers/create', component: ViewCostCenterComponent, data: {mode: 'create'}},
   {path: 'cost-centers/:id/edit', component: ViewCostCenterComponent, data: {mode: 'edit'}},
-  {path: 'cost-centers/:id', component: ViewCostCenterComponent, data: {mode: 'view'}}
+  {path: 'cost-centers/:id', component: ViewCostCenterComponent, data: {mode: 'view'}},
+
+  {path: 'accounting-periods', component: ListAccountingPeriodComponent},
+  {path: 'accounting-periods/create', component: ViewAccountingPeriodComponent, data: {mode: 'create'}},
+  {path: 'accounting-periods/:id/edit', component: ViewAccountingPeriodComponent, data: {mode: 'edit'}},
+  {path: 'accounting-periods/:id', component: ViewAccountingPeriodComponent, data: {mode: 'view'}}
 ];
 
 @NgModule({

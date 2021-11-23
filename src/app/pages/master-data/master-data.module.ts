@@ -18,6 +18,8 @@ import { ListTaxGroupsComponent } from './tax-groups/list-tax-groups/list-tax-gr
 import { ViewTaxGroupsComponent } from './tax-groups/view-tax-groups/view-tax-groups.component';
 import { ListCostCenterComponent } from './cost-center/list-cost-center/list-cost-center.component';
 import { ViewCostCenterComponent } from './cost-center/view-cost-center/view-cost-center.component';
+import { ListAccountingPeriodComponent } from './accouting-period/list-accounting-period/list-accounting-period.component';
+import { ViewAccountingPeriodComponent } from './accouting-period/view-accounting-period/view-accounting-period.component';
 
 
 
@@ -36,7 +38,9 @@ import { ViewCostCenterComponent } from './cost-center/view-cost-center/view-cos
     ListTaxGroupsComponent,
     ViewTaxGroupsComponent,
     ListCostCenterComponent,
-    ViewCostCenterComponent
+    ViewCostCenterComponent,
+    ListAccountingPeriodComponent,
+    ViewAccountingPeriodComponent
   ],
   imports: [
     CommonModule,
