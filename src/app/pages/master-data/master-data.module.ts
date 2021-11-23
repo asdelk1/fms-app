@@ -14,6 +14,8 @@ import { ViewPaymentTermsComponent } from './payment-terms/view-payment-terms/vi
 import { ListPaymentTermsComponent } from './payment-terms/list-payment-terms/list-payment-terms.component';
 import { ListTaxTypesComponent } from './tax-types/list-tax-types/list-tax-types.component';
 import { ViewTaxTypesComponent } from './tax-types/view-tax-types/view-tax-types.component';
+import { ListTaxGroupsComponent } from './tax-groups/list-tax-groups/list-tax-groups.component';
+import { ViewTaxGroupsComponent } from './tax-groups/view-tax-groups/view-tax-groups.component';
 
 
 
@@ -28,7 +30,9 @@ import { ViewTaxTypesComponent } from './tax-types/view-tax-types/view-tax-types
     ViewPaymentTermsComponent,
     ListPaymentTermsComponent,
     ListTaxTypesComponent,
-    ViewTaxTypesComponent
+    ViewTaxTypesComponent,
+    ListTaxGroupsComponent,
+    ViewTaxGroupsComponent
   ],
   imports: [
     CommonModule,

@@ -5,14 +5,18 @@ export interface OwerpFormModel {
   type: string;
   canEdit: boolean;
   required?: boolean;
-  autoComplete?: OwerpAutoCompleteOption;
+  autoComplete?: OwerpLabelValueModel;
 }
 
 export interface OwerpAutoCompleteDataModel {
   [name: string]: any[];
 }
 
-export interface OwerpAutoCompleteOption {
+export interface OwerpEnumDataModel {
+  [name: string]: OwerpLabelValueModel[];
+}
+
+export interface OwerpLabelValueModel {
   label: string;
   value: string;
 }
@@ -21,7 +25,8 @@ export enum OwerpFormFieldType {
   TEXT = 'text',
   NUMBER = 'number',
   BOOLEAN = 'boolean',
-  AUTOCOMPLETE = 'autocomplete'
+  AUTOCOMPLETE = 'autocomplete',
+  RADIO = 'radio'
 }
 
 export enum OwerpFormFieldSize {

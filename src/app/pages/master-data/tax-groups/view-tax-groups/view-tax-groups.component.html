@@ -1,0 +1,11 @@
+<ngx-owerp-form
+  [title]="'Tax Groups'"
+  [actions]="actions"
+  [data]="data"
+  [autoCompleteData]="autoCompleteData"
+  [enumData]="enumDataModel"
+  [fields]="fields"
+  [canEdit]="mode !== 'view'"
+  (cancelForm)="cancel()"
+  (saveData)="save($event)"
+></ngx-owerp-form>

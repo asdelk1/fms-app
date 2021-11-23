@@ -1,18 +1,16 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {ProviderService} from '../../../services/provider.service';
 import {Observable} from 'rxjs';
 import {ApiResponse} from '../../../model/api-model';
-import {OwerpLabelValueModel} from '../../../@control/form/owerp-form.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TaxTypesService {
+export class TaxGroupsService {
 
-  private readonly baseURL: string = '/master-data/financial-tax-types';
+  private readonly baseURL: string = '/master-data/tax-groups';
 
-  constructor(private provider: ProviderService) {
-  }
+  constructor(private provider: ProviderService) { }
 
   public fetchAll(): Observable<ApiResponse> {
     return this.provider.get(this.baseURL);

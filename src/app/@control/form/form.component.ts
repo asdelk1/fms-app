@@ -1,21 +1,22 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {
   OwerpAutoCompleteDataModel,
-  OwerpAutoCompleteOption,
+  OwerpEnumDataModel,
   OwerpFormFieldType,
-  OwerpFormModel
+  OwerpFormModel,
+  OwerpLabelValueModel
 } from './owerp-form.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {OwerpActionModel} from '../action/owerp-action.model';
-import {Observable, Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {startWith, takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-owerp-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css']
 })
-export class FormComponent implements OnInit, OnChanges {
+export class FormComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input()
   public title: string;
@@ -29,6 +30,8 @@ export class FormComponent implements OnInit, OnChanges {
   public data: any | any[];
   @Input()
   public canEdit: boolean = true;
+  @Input()
+  public enumData: OwerpEnumDataModel = {};
   @Output()
   public saveData: EventEmitter<any> = new EventEmitter<any>();
   @Output()
@@ -37,9 +40,9 @@ export class FormComponent implements OnInit, OnChanges {
   public formGroup: FormGroup;
 
   private stopAutoCompleteListeners: Subject<void> = new Subject();
-  public autoCompleteOptionsChange: Subject<Array<OwerpAutoCompleteOption>> = new Subject();
-  public autoCompleteOptions$: Observable<Array<OwerpAutoCompleteOption>> =
-    this.autoCompleteOptionsChange.asObservable();
+  public autoCompleteOptionsChanges: { [name: string]: Subject<OwerpLabelValueModel[]> } = {};
+  // public autoCompleteOptions$: Observable<Array<OwerpLabelValueModel>> =
+  //   this.autoCompleteOptionsChange.asObservable();
 
   constructor(public fb: FormBuilder) {
   }
@@ -49,9 +52,13 @@ export class FormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['data'] || changes['autoCompleteData']) {
+    if (changes['data'] || changes['autoCompleteData'] || changes['enumData']) {
       this.render();
     }
+  }
+
+  ngOnDestroy(): void {
+    this.stopAutoCompleteListeners.next(null);
   }
 
   private render(): void {
@@ -60,6 +67,7 @@ export class FormComponent implements OnInit, OnChanges {
       this.fields.forEach((f: OwerpFormModel) => {
         const control: FormControl = this.fb.control(this.getData(f), f.required ? Validators.required : undefined);
         if (f.type === OwerpFormFieldType.AUTOCOMPLETE) {
+          this.autoCompleteOptionsChanges[f.name] = new Subject<OwerpLabelValueModel[]>();
           control.valueChanges.pipe(
             takeUntil(this.stopAutoCompleteListeners.asObservable())
           ).subscribe(
@@ -67,6 +75,14 @@ export class FormComponent implements OnInit, OnChanges {
               this.filterAutoComplete(f, value);
             }
           );
+
+          const obj: any | null = this.data[f.name] ? this.data[f.name] : null;
+          if (obj !== null) {
+            const id: string = `${obj[f.autoComplete.value]}`;
+            if (id) {
+              control.setValue(id);
+            }
+          }
         }
         formControls[f.name] = control;
       });
@@ -124,25 +140,27 @@ export class FormComponent implements OnInit, OnChanges {
     this.cancelForm.emit();
   }
 
-  private filterAutoComplete(field: OwerpFormModel, value: string): OwerpAutoCompleteOption[] {
-    let filteredOptions: OwerpAutoCompleteOption[] = [];
-    if (this.autoCompleteData[field.name]) {
+  private filterAutoComplete(field: OwerpFormModel, value: string): OwerpLabelValueModel[] {
+    let filteredOptions: OwerpLabelValueModel[] = [];
+    if (this.autoCompleteData && this.autoCompleteData[field.name]) {
       filteredOptions = this.autoCompleteData[field.name]
         .map((entry: any) => {
-          const model: OwerpAutoCompleteOption | undefined = field.autoComplete;
+          const model: OwerpLabelValueModel | undefined = field.autoComplete;
           if (model === undefined) {
             return;
           }
-          const option: OwerpAutoCompleteOption = {
+          const option: OwerpLabelValueModel = {
             label: entry[model.label],
             value: entry[model.value]
           };
           return option;
         })
-        .filter((option: OwerpAutoCompleteOption) => {
-          return option.label.toLowerCase().startsWith(value.toLowerCase());
+        .filter((option: OwerpLabelValueModel) => {
+          console.log(value);
+          return value ? option.label.toLowerCase().includes(value.toLowerCase()) : false;
         });
-      this.autoCompleteOptionsChange.next(filteredOptions);
+      const emitter: Subject<OwerpLabelValueModel[]> = this.getAutoCompleteOptionChangeEmitter(field.name);
+      emitter.next(filteredOptions);
     }
     return filteredOptions;
   }
@@ -156,12 +174,22 @@ export class FormComponent implements OnInit, OnChanges {
 
       let label: string = value;
       const autoCompleteData: any[] = this.autoCompleteData[field.name];
-      const record: any | undefined = autoCompleteData.find((d) => d[field.autoComplete.value] === value);
+      const record: any | undefined = autoCompleteData.find((d) => d[field.autoComplete.value] === +value);
       if (record) {
         label = record[field.autoComplete.label];
       }
       return label;
     };
+  }
+
+  public getEnumEntries(field: OwerpFormModel): OwerpLabelValueModel[] {
+    return this.enumData || Object.keys(this.enumData).length > 0 ? this.enumData[field.name] : [];
+  }
+
+  public getAutoCompleteOptionChangeEmitter(fieldName: string): Subject<OwerpLabelValueModel[]> {
+    if (this.autoCompleteOptionsChanges[fieldName]) {
+      return this.autoCompleteOptionsChanges[fieldName];
+    }
   }
 
 }

@@ -8,6 +8,8 @@ import {ListPaymentTermsComponent} from './payment-terms/list-payment-terms/list
 import {ViewPaymentTermsComponent} from './payment-terms/view-payment-terms/view-payment-terms.component';
 import {ListTaxTypesComponent} from './tax-types/list-tax-types/list-tax-types.component';
 import {ViewTaxTypesComponent} from './tax-types/view-tax-types/view-tax-types.component';
+import {ListTaxGroupsComponent} from './tax-groups/list-tax-groups/list-tax-groups.component';
+import {ViewTaxGroupsComponent} from './tax-groups/view-tax-groups/view-tax-groups.component';
 
 const routes: Routes = [
   {path: 'currency-types', component: ListCurrencyTypesComponent},
@@ -28,7 +30,12 @@ const routes: Routes = [
   {path: 'tax-types', component: ListTaxTypesComponent},
   {path: 'tax-types/create', component: ViewTaxTypesComponent, data: {mode: 'create'}},
   {path: 'tax-types/:id/edit', component: ViewTaxTypesComponent, data: {mode: 'edit'}},
-  {path: 'tax-types/:id', component: ViewTaxTypesComponent, data: {mode: 'view'}}
+  {path: 'tax-types/:id', component: ViewTaxTypesComponent, data: {mode: 'view'}},
+
+  {path: 'tax-groups', component: ListTaxGroupsComponent},
+  {path: 'tax-groups/create', component: ViewTaxGroupsComponent, data: {mode: 'create'}},
+  {path: 'tax-groups/:id/edit', component: ViewTaxGroupsComponent, data: {mode: 'edit'}},
+  {path: 'tax-groups/:id', component: ViewTaxGroupsComponent, data: {mode: 'view'}}
 ];
 
 @NgModule({

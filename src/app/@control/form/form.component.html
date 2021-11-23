@@ -16,13 +16,23 @@
                    [type]="field.type"
                    [placeholder]="field.label" [readOnly]="!canEdit || (canEdit &&!field.canEdit)">
 
+            <div *ngIf="field.type === 'radio'">
+              <input *ngIf="!canEdit || (canEdit && !field.canEdit)" type="text" nbInput [formControlName]="field.name" fullWidth readOnly>
+
+              <nb-radio-group *ngIf="canEdit && field.canEdit"  [formControl]="formGroup.controls[field.name]"
+                              name="reactive-forms-group">
+                <nb-radio *ngFor="let radio of getEnumEntries(field)" [value]="radio.value">{{radio.label}}</nb-radio>
+
+              </nb-radio-group>
+            </div>
+
             <div *ngIf="field.type === 'autocomplete'">
               <input type="text" nbInput [formControl]="formGroup.controls[field.name]" fullWidth
                      [placeholder]="field.label" [readOnly]="!canEdit || (canEdit &&!field.canEdit)"
                      [nbAutocomplete]="autoControl">
 
               <nb-autocomplete #autoControl [handleDisplayFn]="getAutoCompleteLabel(field)">
-                <nb-option *ngFor="let option of autoCompleteOptions$ | async" [value]="option.value">
+                <nb-option *ngFor="let option of getAutoCompleteOptionChangeEmitter(field.name) | async" [value]="option.value">
                   {{ option.label }}
                 </nb-option>
 
