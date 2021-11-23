@@ -103,5 +103,4 @@ export class ViewPaymentTermsComponent implements OnInit {
   private navigateToViewPage(id: string): void {
     this.router.navigate(['payment-terms', id], {relativeTo: this.route.parent});
   }
-
 }

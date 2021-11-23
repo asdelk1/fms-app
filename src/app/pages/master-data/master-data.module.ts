@@ -16,6 +16,8 @@ import { ListTaxTypesComponent } from './tax-types/list-tax-types/list-tax-types
 import { ViewTaxTypesComponent } from './tax-types/view-tax-types/view-tax-types.component';
 import { ListTaxGroupsComponent } from './tax-groups/list-tax-groups/list-tax-groups.component';
 import { ViewTaxGroupsComponent } from './tax-groups/view-tax-groups/view-tax-groups.component';
+import { ListCostCenterComponent } from './cost-center/list-cost-center/list-cost-center.component';
+import { ViewCostCenterComponent } from './cost-center/view-cost-center/view-cost-center.component';
 
 
 
@@ -32,7 +34,9 @@ import { ViewTaxGroupsComponent } from './tax-groups/view-tax-groups/view-tax-gr
     ListTaxTypesComponent,
     ViewTaxTypesComponent,
     ListTaxGroupsComponent,
-    ViewTaxGroupsComponent
+    ViewTaxGroupsComponent,
+    ListCostCenterComponent,
+    ViewCostCenterComponent
   ],
   imports: [
     CommonModule,

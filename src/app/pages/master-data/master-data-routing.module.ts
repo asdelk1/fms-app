@@ -10,6 +10,8 @@ import {ListTaxTypesComponent} from './tax-types/list-tax-types/list-tax-types.c
 import {ViewTaxTypesComponent} from './tax-types/view-tax-types/view-tax-types.component';
 import {ListTaxGroupsComponent} from './tax-groups/list-tax-groups/list-tax-groups.component';
 import {ViewTaxGroupsComponent} from './tax-groups/view-tax-groups/view-tax-groups.component';
+import {ListCostCenterComponent} from './cost-center/list-cost-center/list-cost-center.component';
+import {ViewCostCenterComponent} from './cost-center/view-cost-center/view-cost-center.component';
 
 const routes: Routes = [
   {path: 'currency-types', component: ListCurrencyTypesComponent},
@@ -35,7 +37,12 @@ const routes: Routes = [
   {path: 'tax-groups', component: ListTaxGroupsComponent},
   {path: 'tax-groups/create', component: ViewTaxGroupsComponent, data: {mode: 'create'}},
   {path: 'tax-groups/:id/edit', component: ViewTaxGroupsComponent, data: {mode: 'edit'}},
-  {path: 'tax-groups/:id', component: ViewTaxGroupsComponent, data: {mode: 'view'}}
+  {path: 'tax-groups/:id', component: ViewTaxGroupsComponent, data: {mode: 'view'}},
+
+  {path: 'cost-centers', component: ListCostCenterComponent},
+  {path: 'cost-centers/create', component: ViewCostCenterComponent, data: {mode: 'create'}},
+  {path: 'cost-centers/:id/edit', component: ViewCostCenterComponent, data: {mode: 'edit'}},
+  {path: 'cost-centers/:id', component: ViewCostCenterComponent, data: {mode: 'view'}}
 ];
 
 @NgModule({
