@@ -6,7 +6,7 @@ import {OwerpFormFieldSize, OwerpFormFieldType, OwerpFormModel} from '../../../@
 import {
   OwerpTableColumns,
   OwerpTableColumnType,
-  OwerpTableSelectionMode
+  OwerpSelectionMode
 } from '../../../@control/table/owerp-table.model';
 import {OwerpActionModel} from '../../../@control/action/owerp-action.model';
 import {UserMessageService} from '../../../services/user-message.service';
@@ -37,12 +37,12 @@ export class ViewUserGroupComponent implements OnInit {
     'firstName': {title: 'First Name', type: OwerpTableColumnType.TEXT},
     'lastName': {title: 'Last Name', type: OwerpTableColumnType.TEXT}
   };
-  public userTableSelectionMode: OwerpTableSelectionMode = OwerpTableSelectionMode.MULTI;
+  public userTableSelectionMode: OwerpSelectionMode = OwerpSelectionMode.MULTI;
   public userTableActions: OwerpActionModel[] = [
     {
       name: 'deleteUsersFromGroup',
       label: 'Remove',
-      mode: OwerpTableSelectionMode.MULTI,
+      mode: OwerpSelectionMode.MULTI,
       execute: this.removeUsersFromGroup.bind(this)
     }
   ];
@@ -51,11 +51,11 @@ export class ViewUserGroupComponent implements OnInit {
     'name': {title: 'Name', type: OwerpTableColumnType.TEXT},
     'isGranted': {title: 'Granted', type: OwerpTableColumnType.BOOLEAN}
   };
-  public permissionTableSelectionMode: OwerpTableSelectionMode = OwerpTableSelectionMode.MULTI;
+  public permissionTableSelectionMode: OwerpSelectionMode = OwerpSelectionMode.MULTI;
   public permissionTableActions: OwerpActionModel[] = [
     {
       name: 'grantPermission',
-      mode: OwerpTableSelectionMode.MULTI,
+      mode: OwerpSelectionMode.MULTI,
       label: 'Grant',
       status: 'success',
       execute: this.grantPermission.bind(this),
@@ -63,7 +63,7 @@ export class ViewUserGroupComponent implements OnInit {
     },
     {
       name: 'denyPermission',
-      mode: OwerpTableSelectionMode.MULTI,
+      mode: OwerpSelectionMode.MULTI,
       label: 'Deny',
       status: 'danger',
       execute: this.denyPermission.bind(this),

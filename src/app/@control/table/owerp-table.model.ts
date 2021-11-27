@@ -8,9 +8,10 @@ export interface OwerpColumnDefinition {
   type: OwerpTableColumnType;
 }
 
-export enum OwerpTableSelectionMode {
+export enum OwerpSelectionMode {
   SINGLE = 'single',
-  MULTI = 'multi'
+  MULTI = 'multi',
+  NONE = 'none'
 }
 
 export enum OwerpTableColumnType {

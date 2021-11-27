@@ -10,7 +10,7 @@ import {
   OwerpFormModel
 } from '../../../../@control/form/owerp-form.model';
 import {OwerpActionModel} from '../../../../@control/action/owerp-action.model';
-import {LedgerAccountService} from '../../ledger-account.service';
+import {LedgerService} from '../../../ledger/ledger.service';
 
 @Component({
   selector: 'ngx-owerp-view-tax-types',
@@ -59,7 +59,7 @@ export class ViewTaxTypesComponent implements OnInit {
               private route: ActivatedRoute,
               private service: TaxTypesService,
               private ums: UserMessageService,
-              private lac: LedgerAccountService) {
+              private lac: LedgerService) {
   }
 
   ngOnInit(): void {

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {
   OwerpTableColumns,
   OwerpTableColumnType,
-  OwerpTableSelectionMode
+  OwerpSelectionMode
 } from '../../../../@control/table/owerp-table.model';
 import {PaymentMethodService} from '../payment-method.service';
 import {OwerpActionModel} from '../../../../@control/action/owerp-action.model';
@@ -28,7 +28,7 @@ export class ListPaymentMethodsComponent implements OnInit {
       name: 'viewPaymentMethodDetails',
       label: 'Details',
       execute: this.viewDetails.bind(this),
-      mode: OwerpTableSelectionMode.SINGLE
+      mode: OwerpSelectionMode.SINGLE
     }
   ];
 

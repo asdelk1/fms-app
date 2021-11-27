@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {
   OwerpTableColumns,
   OwerpTableColumnType,
-  OwerpTableSelectionMode
+  OwerpSelectionMode
 } from '../../../../@control/table/owerp-table.model';
 import {OwerpActionModel} from '../../../../@control/action/owerp-action.model';
 import {Router} from '@angular/router';
@@ -28,7 +28,7 @@ export class ListAccountingPeriodComponent implements OnInit {
       name: 'viewAccountingPeriodDetails',
       label: 'Details',
       execute: this.viewDetails.bind(this),
-      mode: OwerpTableSelectionMode.SINGLE
+      mode: OwerpSelectionMode.SINGLE
     }
   ];
 

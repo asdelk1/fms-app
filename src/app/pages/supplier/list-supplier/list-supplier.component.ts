@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {
   OwerpTableColumns,
   OwerpTableColumnType,
-  OwerpTableSelectionMode
+  OwerpSelectionMode
 } from '../../../@control/table/owerp-table.model';
 import {OwerpActionModel} from '../../../@control/action/owerp-action.model';
 import {SupplierService} from '../supplier.service';
@@ -23,7 +23,7 @@ export class ListSupplierComponent implements OnInit {
     status: {title: 'Status', type: OwerpTableColumnType.BOOLEAN}
   };
 
-  public selectionMode: OwerpTableSelectionMode = OwerpTableSelectionMode.SINGLE;
+  public selectionMode: OwerpSelectionMode = OwerpSelectionMode.SINGLE;
   public actions: OwerpActionModel[] = [
     {name: 'viewSupplierDetails', label: 'Details', execute: this.viewDetails.bind(this)}
   ];

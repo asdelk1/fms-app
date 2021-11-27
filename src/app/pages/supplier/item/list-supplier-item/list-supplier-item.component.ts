@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {
   OwerpTableColumns,
   OwerpTableColumnType,
-  OwerpTableSelectionMode
+  OwerpSelectionMode
 } from '../../../../@control/table/owerp-table.model';
 import {OwerpActionModel} from '../../../../@control/action/owerp-action.model';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -21,11 +21,11 @@ export class ListSupplierItemComponent implements OnInit {
     description: {title: 'Description', type: OwerpTableColumnType.TEXT},
     status: {title: 'Code', type: OwerpTableColumnType.BOOLEAN}
   };
-  public selectionMode: OwerpTableSelectionMode = OwerpTableSelectionMode.SINGLE;
+  public selectionMode: OwerpSelectionMode = OwerpSelectionMode.SINGLE;
   public actions: OwerpActionModel[] = [
     {
       name: 'viewSupplierTypeDetails',
-      mode: OwerpTableSelectionMode.SINGLE,
+      mode: OwerpSelectionMode.SINGLE,
       label: 'Details',
       execute: this.viewDetails.bind(this)
     }

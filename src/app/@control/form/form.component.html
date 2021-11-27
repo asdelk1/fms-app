@@ -22,7 +22,7 @@
                      fullWidth readOnly>
 
               <nb-radio-group *ngIf="canEdit && field.canEdit" [formControl]="formGroup.controls[field.name]"
-                              name="reactive-forms-group">
+                              [name]="field.groupName ? field.groupName : field.name" >
                 <nb-radio *ngFor="let radio of getEnumEntries(field)" [value]="radio.value">{{radio.label}}</nb-radio>
 
               </nb-radio-group>

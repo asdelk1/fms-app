@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {
   OwerpTableColumns,
   OwerpTableColumnType,
-  OwerpTableSelectionMode
+  OwerpSelectionMode
 } from '../../../@control/table/owerp-table.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserGroupService} from '../user-group.service';
@@ -28,11 +28,11 @@ export class AddUserComponent implements OnInit {
     {
       name: 'addUserToGroup',
       label: 'Add',
-      mode: OwerpTableSelectionMode.MULTI,
+      mode: OwerpSelectionMode.MULTI,
       execute: this.addUsersToGroup.bind(this)
     }
   ];
-  public selectionMode: OwerpTableSelectionMode = OwerpTableSelectionMode.MULTI;
+  public selectionMode: OwerpSelectionMode = OwerpSelectionMode.MULTI;
   private userGroupId: number;
 
   constructor(private route: ActivatedRoute,

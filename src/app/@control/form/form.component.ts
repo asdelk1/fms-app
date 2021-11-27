@@ -9,7 +9,7 @@ import {
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {OwerpActionModel} from '../action/owerp-action.model';
 import {Subject} from 'rxjs';
-import {startWith, takeUntil} from 'rxjs/operators';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-owerp-form',

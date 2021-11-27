@@ -62,6 +62,10 @@ export const MENU_ITEMS: OwerpMenuItem[] = [
   {title: 'Master Data',
   children: [
     {
+      title: 'Chart Of Accounts',
+      link: '/pages/master-data/chart-of-accounts'
+    },
+    {
       title: 'Currency Types',
       link: '/pages/master-data/currency-types'
     },

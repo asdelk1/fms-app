@@ -20,6 +20,7 @@ import { ListCostCenterComponent } from './cost-center/list-cost-center/list-cos
 import { ViewCostCenterComponent } from './cost-center/view-cost-center/view-cost-center.component';
 import { ListAccountingPeriodComponent } from './accouting-period/list-accounting-period/list-accounting-period.component';
 import { ViewAccountingPeriodComponent } from './accouting-period/view-accounting-period/view-accounting-period.component';
+import { ListChartOfAccountsComponent } from './chart-of-accounts/list-chart-of-accounts/list-chart-of-accounts.component';
 
 
 
@@ -40,7 +41,8 @@ import { ViewAccountingPeriodComponent } from './accouting-period/view-accountin
     ListCostCenterComponent,
     ViewCostCenterComponent,
     ListAccountingPeriodComponent,
-    ViewAccountingPeriodComponent
+    ViewAccountingPeriodComponent,
+    ListChartOfAccountsComponent
   ],
   imports: [
     CommonModule,

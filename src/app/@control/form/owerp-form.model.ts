@@ -6,6 +6,7 @@ export interface OwerpFormModel {
   canEdit: boolean;
   required?: boolean;
   autoComplete?: OwerpLabelValueModel;
+  groupName?: string;
 }
 
 export interface OwerpAutoCompleteDataModel {

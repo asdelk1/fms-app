@@ -2,7 +2,7 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {
   OwerpTableColumns,
   OwerpTableColumnType,
-  OwerpTableSelectionMode
+  OwerpSelectionMode
 } from '../../../@control/table/owerp-table.model';
 import {OwerpActionModel} from '../../../@control/action/owerp-action.model';
 import {UserGroupService} from '../user-group.service';
@@ -22,12 +22,12 @@ export class ListUserGroupComponent implements OnInit {
   };
 
   public actions: OwerpActionModel[] = [
-    {name: 'viewGroupDetails', mode: OwerpTableSelectionMode.SINGLE, execute: this.viewDetails.bind(this), label: 'Details'}
+    {name: 'viewGroupDetails', mode: OwerpSelectionMode.SINGLE, execute: this.viewDetails.bind(this), label: 'Details'}
   ];
 
   public data: any[];
 
-  public selectionMode: OwerpTableSelectionMode = OwerpTableSelectionMode.SINGLE;
+  public selectionMode: OwerpSelectionMode = OwerpSelectionMode.SINGLE;
 
   constructor(private ugService: UserGroupService,
               private activatedRoute: ActivatedRoute,

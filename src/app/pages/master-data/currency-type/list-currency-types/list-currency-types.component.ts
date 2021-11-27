@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {
   OwerpTableColumns,
   OwerpTableColumnType,
-  OwerpTableSelectionMode
+  OwerpSelectionMode
 } from '../../../../@control/table/owerp-table.model';
 import {OwerpActionModel} from '../../../../@control/action/owerp-action.model';
 import {CurrencyTypeService} from '../currency-type.service';
@@ -27,7 +27,7 @@ export class ListCurrencyTypesComponent implements OnInit {
       name: 'viewCurrencyType',
       label: 'Details',
       execute: this.viewCurrencyType.bind(this),
-      mode: OwerpTableSelectionMode.SINGLE
+      mode: OwerpSelectionMode.SINGLE
     }
   ];
 

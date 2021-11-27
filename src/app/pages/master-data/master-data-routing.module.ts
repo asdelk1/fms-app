@@ -14,6 +14,7 @@ import {ListCostCenterComponent} from './cost-center/list-cost-center/list-cost-
 import {ViewCostCenterComponent} from './cost-center/view-cost-center/view-cost-center.component';
 import {ListAccountingPeriodComponent} from './accouting-period/list-accounting-period/list-accounting-period.component';
 import {ViewAccountingPeriodComponent} from './accouting-period/view-accounting-period/view-accounting-period.component';
+import {ListChartOfAccountsComponent} from './chart-of-accounts/list-chart-of-accounts/list-chart-of-accounts.component';
 
 const routes: Routes = [
   {path: 'currency-types', component: ListCurrencyTypesComponent},
@@ -49,7 +50,9 @@ const routes: Routes = [
   {path: 'accounting-periods', component: ListAccountingPeriodComponent},
   {path: 'accounting-periods/create', component: ViewAccountingPeriodComponent, data: {mode: 'create'}},
   {path: 'accounting-periods/:id/edit', component: ViewAccountingPeriodComponent, data: {mode: 'edit'}},
-  {path: 'accounting-periods/:id', component: ViewAccountingPeriodComponent, data: {mode: 'view'}}
+  {path: 'accounting-periods/:id', component: ViewAccountingPeriodComponent, data: {mode: 'view'}},
+
+  {path: 'chart-of-accounts', component: ListChartOfAccountsComponent}
 ];
 
 @NgModule({
