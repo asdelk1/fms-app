@@ -104,6 +104,11 @@ const routes: Routes = [{
         .then(m => m.LedgerModule)
     },
     {
+      path: 'customers',
+      loadChildren: () => import('./customer/customer.module')
+        .then(m => m.CustomerModule)
+    },
+    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full'

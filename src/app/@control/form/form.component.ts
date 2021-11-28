@@ -78,7 +78,7 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
 
           const obj: any | null = this.data[f.name] ? this.data[f.name] : null;
           if (obj !== null) {
-            const id: string = `${obj[f.autoComplete.value]}`;
+            const id: string = obj[f.autoComplete.value];
             if (id) {
               control.setValue(id);
             }
@@ -132,7 +132,6 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
         }
       );
     }
-
     this.saveData.emit(data);
   }
 
@@ -144,20 +143,9 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
     let filteredOptions: OwerpLabelValueModel[] = [];
     if (this.autoCompleteData && this.autoCompleteData[field.name]) {
       filteredOptions = this.autoCompleteData[field.name]
-        .map((entry: any) => {
-          const model: OwerpLabelValueModel | undefined = field.autoComplete;
-          if (model === undefined) {
-            return;
-          }
-          const option: OwerpLabelValueModel = {
-            label: entry[model.label],
-            value: entry[model.value]
-          };
-          return option;
-        })
         .filter((option: OwerpLabelValueModel) => {
           console.log(value);
-          return value ? option.label.toLowerCase().includes(value.toLowerCase()) : false;
+          return value && typeof value === 'string' ? option.label.toLowerCase().includes(value.toLowerCase()) : false;
         });
       const emitter: Subject<OwerpLabelValueModel[]> = this.getAutoCompleteOptionChangeEmitter(field.name);
       emitter.next(filteredOptions);
@@ -173,10 +161,11 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
       }
 
       let label: string = value;
-      const autoCompleteData: any[] = this.autoCompleteData[field.name];
-      const record: any | undefined = autoCompleteData.find((d) => d[field.autoComplete.value] === +value);
+      const autoCompleteData: OwerpLabelValueModel[] = this.autoCompleteData[field.name];
+      const record: OwerpLabelValueModel | undefined =
+        autoCompleteData.find((d: OwerpLabelValueModel) => d.value === value);
       if (record) {
-        label = record[field.autoComplete.label];
+        label = record.label;
       }
       return label;
     };

@@ -38,10 +38,16 @@ export const MENU_ITEMS: OwerpMenuItem[] = [
   },
   {
     title: 'Customers',
-    children: [{
+    children: [
+      {
       title: 'Types',
       link: '/pages/customer-types'
-    }]
+    },
+      {
+        title: 'Items',
+        link: '/pages/customers/items'
+      }
+    ]
   },
   {
     title: 'Suppliers',
