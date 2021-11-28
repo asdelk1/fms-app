@@ -12,9 +12,21 @@
         <div *ngFor="let field of fields" [class]="getWidth(field.size)">
           <div class="form-group">
             <label [for]="field.name" class="label">{{field.label}}</label>
-            <input *ngIf="field.type === 'text' || field.type === 'number'" type="text" nbInput [formControlName]="field.name" fullWidth
+            <input *ngIf="field.type === 'text' || field.type === 'number'" type="text" nbInput
+                   [formControlName]="field.name" fullWidth
                    [type]="field.type"
                    [placeholder]="field.label" [readOnly]="!canEdit || (canEdit &&!field.canEdit)">
+
+            <div *ngIf="field.type === 'radio'">
+              <input *ngIf="!canEdit || (canEdit && !field.canEdit)" type="text" nbInput [formControlName]="field.name"
+                     fullWidth readOnly>
+
+              <nb-radio-group *ngIf="canEdit && field.canEdit" [formControl]="formGroup.controls[field.name]"
+                              [name]="field.groupName ? field.groupName : field.name" >
+                <nb-radio *ngFor="let radio of getEnumEntries(field)" [value]="radio.value">{{radio.label}}</nb-radio>
+
+              </nb-radio-group>
+            </div>
 
             <div *ngIf="field.type === 'autocomplete'">
               <input type="text" nbInput [formControl]="formGroup.controls[field.name]" fullWidth
@@ -22,22 +34,43 @@
                      [nbAutocomplete]="autoControl">
 
               <nb-autocomplete #autoControl [handleDisplayFn]="getAutoCompleteLabel(field)">
-                <nb-option *ngFor="let option of autoCompleteOptions$ | async" [value]="option.value">
+                <nb-option *ngFor="let option of getAutoCompleteOptionChangeEmitter(field.name) | async"
+                           [value]="option.value">
                   {{ option.label }}
                 </nb-option>
 
               </nb-autocomplete>
             </div>
 
-          </div>
-          <nb-badge style="position: relative; top: -20%" nbInput
-                    *ngIf="field.type === 'boolean' && (!canEdit || (canEdit && !field.canEdit))"
-                    [text]="getData(field)"
-                    [status]="getData(field)  === 'true' ? 'success' : 'danger'">
+            <div *ngIf="field.type === 'date'">
+              <ng-container *ngIf="canEdit && field.canEdit;else readOnlyDatePicker" >
+                <input nbInput fullWidth
+                       [placeholder]="field.label"
+                       [formControl]="formGroup.controls[field.name]"
+                       [nbDatepicker]="formpicker">
+                <nb-datepicker format="yyyy-MM-dd" #formpicker></nb-datepicker>
+              </ng-container>
+              <ng-template #readOnlyDatePicker>
+                <input nbInput fullWidth
+                       [placeholder]="field.label"
+                       [readOnly]="!canEdit || (canEdit &&!field.canEdit)"
+                       [formControl]="formGroup.controls[field.name]">
+              </ng-template>
 
-          </nb-badge>
-          <nb-toggle nbInput *ngIf="field.type === 'boolean' && (canEdit === true && field.canEdit === true)"
-                     [formControlName]="field.name"></nb-toggle>
+            </div>
+
+
+            <div>
+              <nb-badge style="position: relative; top: -20%" nbInput
+                        *ngIf="field.type === 'boolean' && (!canEdit || (canEdit && !field.canEdit))"
+                        [text]="getData(field)"
+                        [status]="getData(field)  === 'true' ? 'success' : 'danger'">
+
+              </nb-badge>
+              <nb-toggle nbInput *ngIf="field.type === 'boolean' && (canEdit === true && field.canEdit === true)"
+                         [formControlName]="field.name"></nb-toggle>
+            </div>
+          </div>
 
 
         </div>

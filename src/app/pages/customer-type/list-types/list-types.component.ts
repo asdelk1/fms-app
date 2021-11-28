@@ -3,7 +3,7 @@ import {CustomerTypeService} from '../customer-type.service';
 import {
   OwerpTableColumns,
   OwerpTableColumnType,
-  OwerpTableSelectionMode
+  OwerpSelectionMode
 } from '../../../@control/table/owerp-table.model';
 import {ApiResponse} from '../../../model/api-model';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -39,11 +39,11 @@ export class ListTypesComponent implements OnInit {
     {
       name: 'customerTypeDetails',
       label: 'Details',
-      mode: OwerpTableSelectionMode.SINGLE,
+      mode: OwerpSelectionMode.SINGLE,
       execute: this.viewDetails.bind(this)
     }
   ];
-  public selectionType: OwerpTableSelectionMode = OwerpTableSelectionMode.SINGLE;
+  public selectionType: OwerpSelectionMode = OwerpSelectionMode.SINGLE;
   public data: any[];
 
   constructor(private service: CustomerTypeService,

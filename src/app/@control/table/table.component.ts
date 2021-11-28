@@ -4,7 +4,7 @@ import {
   OwerpColumnDefinition,
   OwerpTableColumns,
   OwerpTableColumnType,
-  OwerpTableSelectionMode
+  OwerpSelectionMode
 } from './owerp-table.model';
 import {OwerpActionModel} from '../action/owerp-action.model';
 import {OwerpBooleanColumnComponent} from './owerp-boolean-column/owerp-boolean-column.component';
@@ -29,7 +29,7 @@ export class TableComponent implements OnInit, OnChanges {
   public actions: OwerpActionModel[];
 
   @Input()
-  public selectionMode: OwerpTableSelectionMode = OwerpTableSelectionMode.SINGLE;
+  public selectionMode: OwerpSelectionMode.SINGLE | OwerpSelectionMode.MULTI = OwerpSelectionMode.SINGLE;
 
   @Input()
   public hideCard: boolean = false;
@@ -66,7 +66,7 @@ export class TableComponent implements OnInit, OnChanges {
 
   private initTable(): void {
     const tableSettings: any = {
-      selectMode: this.selectionMode === OwerpTableSelectionMode.MULTI ? 'multi' : 'single',
+      selectMode: this.selectionMode === OwerpSelectionMode.MULTI ? 'multi' : 'single',
       mode: 'external',
       add: {
         addButtonContent: '<i class="nb-plus"></i>'
@@ -92,9 +92,12 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   public isVisible(model: OwerpActionModel): boolean {
-    if (this.selectedRecords.length === 0) {
-      return false;
-    } else if (model.mode === 'single') {
+
+    if (model.mode && model.mode === OwerpSelectionMode.NONE) {
+      return true;
+    }
+
+    if (model.mode === 'single') {
       return this.selectedRecords.length === 1;
     } else if (model.visible !== undefined) {
       return model.visible(this.selectedRecords);

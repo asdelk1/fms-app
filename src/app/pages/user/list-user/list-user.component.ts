@@ -6,7 +6,7 @@ import {ApiResponse} from '../../../model/api-model';
 import {
   OwerpTableColumns,
   OwerpTableColumnType,
-  OwerpTableSelectionMode
+  OwerpSelectionMode
 } from '../../../@control/table/owerp-table.model';
 import {OwerpActionModel} from '../../../@control/action/owerp-action.model';
 
@@ -17,12 +17,12 @@ import {OwerpActionModel} from '../../../@control/action/owerp-action.model';
 })
 export class ListUserComponent implements OnInit {
 
-  public selectionMode: OwerpTableSelectionMode = OwerpTableSelectionMode.MULTI;
+  public selectionMode: OwerpSelectionMode = OwerpSelectionMode.MULTI;
   public actions: OwerpActionModel[] = [
     {
       name: 'viewUserDetails',
       label: 'Details',
-      mode: OwerpTableSelectionMode.SINGLE,
+      mode: OwerpSelectionMode.SINGLE,
       execute: this.viewDetails.bind(this)
     }
   ];

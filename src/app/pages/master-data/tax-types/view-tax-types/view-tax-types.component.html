@@ -1,0 +1,10 @@
+<ngx-owerp-form
+  [title]="'Tax Types'"
+  [actions]="actions"
+  [data]="data"
+  [autoCompleteData]="autoCompleteData"
+  [fields]="fields"
+  [canEdit]="mode !== 'view'"
+  (cancelForm)="cancel()"
+  (saveData)="save($event)"
+></ngx-owerp-form>

@@ -94,6 +94,21 @@ const routes: Routes = [{
         .then(m => m.SupplierModule)
     },
     {
+      path: 'master-data',
+      loadChildren: () => import('./master-data/master-data.module')
+        .then(m => m.MasterDataModule)
+    },
+    {
+      path: 'ledger',
+      loadChildren: () => import('./ledger/ledger.module')
+        .then(m => m.LedgerModule)
+    },
+    {
+      path: 'customers',
+      loadChildren: () => import('./customer/customer.module')
+        .then(m => m.CustomerModule)
+    },
+    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full'
