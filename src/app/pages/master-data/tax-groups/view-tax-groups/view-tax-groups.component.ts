@@ -4,7 +4,7 @@ import {
   OwerpEnumDataModel,
   OwerpFormFieldSize,
   OwerpFormFieldType,
-  OwerpFormModel
+  OwerpFormModel, OwerpLabelValueModel
 } from '../../../../@control/form/owerp-form.model';
 import {OwerpActionModel} from '../../../../@control/action/owerp-action.model';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -36,10 +36,7 @@ export class ViewTaxGroupsComponent implements OnInit {
       type: OwerpFormFieldType.AUTOCOMPLETE,
       label: 'Tax Type',
       size: OwerpFormFieldSize.SMALL,
-      autoComplete: {
-        label: 'taxCode',
-        value: 'id'
-      }
+      autoComplete: 'id'
     },
     {
       name: 'taxOperator_01',
@@ -55,10 +52,7 @@ export class ViewTaxGroupsComponent implements OnInit {
       type: OwerpFormFieldType.AUTOCOMPLETE,
       label: 'Tax Type',
       size: OwerpFormFieldSize.SMALL,
-      autoComplete: {
-        label: 'taxCode',
-        value: 'id'
-      }
+      autoComplete: 'id'
     }
   ];
 
@@ -140,8 +134,9 @@ export class ViewTaxGroupsComponent implements OnInit {
     this.taxTypesService.fetchAllActive().subscribe(
       (res: ApiResponse) => {
         const auto: OwerpAutoCompleteDataModel = this.autoCompleteData;
-        auto['finTaxType_01'] = res.data;
-        auto['finTaxType_02'] = res.data;
+        const values: OwerpLabelValueModel[] = this.taxTypesService.getAutocompleteData(res.data);
+        auto['finTaxType_01'] = values;
+        auto['finTaxType_02'] = values;
         this.autoCompleteData = Object.assign({}, auto);
       }
     );

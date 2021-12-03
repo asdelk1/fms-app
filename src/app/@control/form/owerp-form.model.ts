@@ -5,7 +5,7 @@ export interface OwerpFormModel {
   type: string;
   canEdit: boolean;
   required?: boolean;
-  autoComplete?: OwerpLabelValueModel;
+  autoComplete?: string;
   groupName?: string;
   valueChange?: (data: any) => void;
 }

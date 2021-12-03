@@ -29,7 +29,7 @@ export class CreateCustomerComponent implements OnInit {
       required: true,
       canEdit: true,
       valueChange: this.loadCustomerNumber.bind(this),
-      autoComplete: {value: 'id', label: 'Name'}
+      autoComplete: 'id'
     },
     {name: 'customerCode', label: 'Code', type: OwerpFormFieldType.TEXT, required: true, canEdit: true},
     {name: 'registerDate', label: 'Registered date', type: OwerpFormFieldType.DATE, required: true, canEdit: true},
@@ -157,7 +157,7 @@ export class CreateCustomerComponent implements OnInit {
       required: false,
       canEdit: true,
       size: OwerpFormFieldSize.SMALL,
-      autoComplete: {value: 'id', label: 'Name'}
+      autoComplete: 'id'
     },
     {
       name: 'paymentMethod',
@@ -166,7 +166,7 @@ export class CreateCustomerComponent implements OnInit {
       required: false,
       canEdit: true,
       size: OwerpFormFieldSize.SMALL,
-      autoComplete: {value: 'id', label: 'Name'}
+      autoComplete: 'id'
     },
     {
       name: 'controlAccount',
@@ -175,7 +175,7 @@ export class CreateCustomerComponent implements OnInit {
       required: false,
       canEdit: true,
       size: OwerpFormFieldSize.SMALL,
-      autoComplete: {value: 'id', label: 'Name'}
+      autoComplete: 'id'
     },
     {
       name: 'invoiceType',

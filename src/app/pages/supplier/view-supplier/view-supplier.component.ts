@@ -36,9 +36,7 @@ export class ViewSupplierComponent implements OnInit {
       required: true,
       canEdit: true,
       size: OwerpFormFieldSize.SMALL,
-      autoComplete: {
-        value: 'id', label: 'typeName'
-      }
+      autoComplete: 'id'
     },
     {
       name: 'status',

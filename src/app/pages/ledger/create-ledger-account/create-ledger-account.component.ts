@@ -19,7 +19,7 @@ export class CreateLedgerAccountComponent implements OnInit {
       label: 'Category',
       required: true,
       canEdit: true,
-      autoComplete: {value: 'id', label: 'accName'}
+      autoComplete: 'id'
     },
     {
       name: 'ledgerAccCode',
@@ -96,13 +96,13 @@ export class CreateLedgerAccountComponent implements OnInit {
       (res: ApiResponse) => {
         this.data = res.data;
       }
-  );
+    );
   }
 
   public loadActiveLedgerCategories(): void {
     this.service.fetchActiveLedgerCategories().subscribe(
       (res: ApiResponse) => {
-        this.autoCompleteData = {'ledgerCategory': res.data};
+        this.autoCompleteData = {'ledgerCategory': this.service.getLedgerAccountAutoCompleteData(res.data)};
       }
     );
   }

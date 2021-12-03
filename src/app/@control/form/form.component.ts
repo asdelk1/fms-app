@@ -79,7 +79,8 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
     if (this.fields && this.fields.length > 0) {
       const formControls: { [key: string]: any } = {};
       this.fields.forEach((f: OwerpFormModel) => {
-        const control: FormControl = this.fb.control(this.getData(f), f.required ? Validators.required : undefined);
+        const data: any = this.getData(f);
+        const control: FormControl = this.fb.control(data, f.required ? Validators.required : undefined);
         if (f.type === OwerpFormFieldType.AUTOCOMPLETE) {
           this.autoCompleteOptionsChanges[f.name] = new Subject<OwerpLabelValueModel[]>();
           control.valueChanges.pipe(
@@ -90,13 +91,13 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
             }
           );
 
-          const obj: any | null = this.data[f.name] ? this.data[f.name] : null;
-          if (obj !== null) {
-            const id: string = obj[f.autoComplete.value];
-            if (id) {
-              control.setValue(id);
-            }
-          }
+          //   const obj: any | null = this.data[f.name] ? this.data[f.name] : null;
+          //   if (obj !== null) {
+          //     const id: string = obj[f.autoComplete.value];
+          //     if (id) {
+          //       control.setValue(id);
+          //     }
+          //   }
         }
         formControls[f.name] = control;
       });
@@ -107,6 +108,8 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
   public getData(field: OwerpFormModel): string {
     if (field.type === OwerpFormFieldType.BOOLEAN) {
       return this.data && this.data[field.name] ? 'true' : 'false';
+    } else if (field.type === OwerpFormFieldType.AUTOCOMPLETE) {
+      return this.data && this.data[field.name] && field.autoComplete ? this.data[field.name][field.autoComplete] : '';
     }
     return this.data && this.data[field.name] !== undefined ? this.data[field.name] : '';
   }

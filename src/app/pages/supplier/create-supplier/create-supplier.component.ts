@@ -35,9 +35,7 @@ export class CreateSupplierComponent implements OnInit {
       required: true,
       canEdit: true,
       size: OwerpFormFieldSize.SMALL,
-      autoComplete: {
-        value: 'id', label: 'typeName'
-      }
+      autoComplete: 'id'
     },
     {
       name: 'status',
@@ -201,7 +199,7 @@ export class CreateSupplierComponent implements OnInit {
   public fetchSupplierTypes(): void {
     this.supplierTypeService.fetchActiveTypes().subscribe(
       (res: ApiResponse) => {
-        this.autoCompleteData['type'] = res.data;
+        this.autoCompleteData['type'] = this.supplierTypeService.getAutocompleteData(res.data);
         this.autoCompleteData = Object.assign({}, this.autoCompleteData);
       });
   }
