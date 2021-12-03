@@ -32,6 +32,16 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
   public canEdit: boolean = true;
   @Input()
   public enumData: OwerpEnumDataModel = {};
+  @Input()
+  public showCard: boolean = true;
+  @Input()
+  public saveLabel: string = 'Save';
+  @Input()
+  public cancelLabel: string = 'Cancel';
+  @Input()
+  public disableCancel: boolean = false;
+  @Input()
+  public patchData: any;
   @Output()
   public saveData: EventEmitter<any> = new EventEmitter<any>();
   @Output()
@@ -54,6 +64,10 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data'] || changes['autoCompleteData'] || changes['enumData']) {
       this.render();
+    }
+
+    if (changes['patchData']) {
+      this.formGroup.patchValue(this.patchData);
     }
   }
 
@@ -144,7 +158,6 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
     if (this.autoCompleteData && this.autoCompleteData[field.name]) {
       filteredOptions = this.autoCompleteData[field.name]
         .filter((option: OwerpLabelValueModel) => {
-          console.log(value);
           return value && typeof value === 'string' ? option.label.toLowerCase().includes(value.toLowerCase()) : false;
         });
       const emitter: Subject<OwerpLabelValueModel[]> = this.getAutoCompleteOptionChangeEmitter(field.name);
@@ -178,6 +191,12 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
   public getAutoCompleteOptionChangeEmitter(fieldName: string): Subject<OwerpLabelValueModel[]> {
     if (this.autoCompleteOptionsChanges[fieldName]) {
       return this.autoCompleteOptionsChanges[fieldName];
+    }
+  }
+
+  public onAutoCompleteValueChange(field: OwerpFormModel, data: string): void {
+    if (field.valueChange && data !== '') {
+      field.valueChange(data);
     }
   }
 

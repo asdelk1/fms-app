@@ -40,12 +40,20 @@ export const MENU_ITEMS: OwerpMenuItem[] = [
     title: 'Customers',
     children: [
       {
-      title: 'Types',
-      link: '/pages/customer-types'
-    },
+        title: 'View',
+        link: '/pages/customers'
+      },
+      {
+        title: 'Types',
+        link: '/pages/customer-types'
+      },
       {
         title: 'Items',
         link: '/pages/customers/items'
+      },
+      {
+        title: 'Sale Invoices',
+        link: '/pages/sales-invoices'
       }
     ]
   },
@@ -54,52 +62,54 @@ export const MENU_ITEMS: OwerpMenuItem[] = [
     children: [
       {
         title: 'View',
-        link: '/pages/suppliers',
+        link: '/pages/suppliers'
       },
       {
-      title: 'Types',
-      link: '/pages/suppliers/types'
-    },
+        title: 'Types',
+        link: '/pages/suppliers/types'
+      },
       {
         title: 'Items',
         link: '/pages/suppliers/items'
       }]
   },
-  {title: 'Master Data',
-  children: [
-    {
-      title: 'Chart Of Accounts',
-      link: '/pages/master-data/chart-of-accounts'
-    },
-    {
-      title: 'Currency Types',
-      link: '/pages/master-data/currency-types'
-    },
-    {
-      title: 'Payment Methods',
-      link: '/pages/master-data/payment-methods'
-    },
-    {
-      title: 'Payment Terms',
-      link: '/pages/master-data/payment-terms'
-    },
-    {
-      title: 'Tax Types',
-      link: '/pages/master-data/tax-types'
-    },
-    {
-      title: 'Tax Groups',
-      link: '/pages/master-data/tax-groups'
-    },
-    {
-      title: 'Cost Centers',
-      link: '/pages/master-data/cost-centers'
-    },
-    {
-      title: 'Accounting Periods',
-      link: '/pages/master-data/accounting-periods'
-    }
-  ]},
+  {
+    title: 'Master Data',
+    children: [
+      {
+        title: 'Chart Of Accounts',
+        link: '/pages/master-data/chart-of-accounts'
+      },
+      {
+        title: 'Currency Types',
+        link: '/pages/master-data/currency-types'
+      },
+      {
+        title: 'Payment Methods',
+        link: '/pages/master-data/payment-methods'
+      },
+      {
+        title: 'Payment Terms',
+        link: '/pages/master-data/payment-terms'
+      },
+      {
+        title: 'Tax Types',
+        link: '/pages/master-data/tax-types'
+      },
+      {
+        title: 'Tax Groups',
+        link: '/pages/master-data/tax-groups'
+      },
+      {
+        title: 'Cost Centers',
+        link: '/pages/master-data/cost-centers'
+      },
+      {
+        title: 'Accounting Periods',
+        link: '/pages/master-data/accounting-periods'
+      }
+    ]
+  },
   {
     title: 'FEATURES',
     group: true

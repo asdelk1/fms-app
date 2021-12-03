@@ -109,6 +109,11 @@ const routes: Routes = [{
         .then(m => m.CustomerModule)
     },
     {
+      path: 'sales-invoices',
+      loadChildren: () => import('./sales-invoice/sales-invoice.module')
+        .then(m => m.SalesInvoiceModule)
+    },
+    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full'
