@@ -39,7 +39,7 @@ export class PaymentTermsService {
     return data.map((t: any) => {
       return {
         value: t['id'],
-        label: t['term']
+        label: `${t['description']} (${t['term']} Days)`
       };
     });
   }

@@ -13,6 +13,7 @@ import {CustomerTypeService} from '../../customer-type/customer-type.service';
 import {ApiResponse} from '../../../model/api-model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserMessageService} from '../../../services/user-message.service';
+import {OwerpFormHelper} from '../../../@control/form/owerp-form-helper';
 
 @Component({
   selector: 'ngx-owerp-create-customer',
@@ -248,7 +249,10 @@ export class CreateCustomerComponent implements OnInit {
   public loadCustomerTypeData(): void {
     this.customerTypeService.getAllActive().subscribe(
       (res: ApiResponse) => {
-        this.updateAutoCompleteDataModel('customerType', this.customerTypeService.getAutoCompleteData(res.data));
+        OwerpFormHelper.updateAutoCompleteDataModel(
+          'customerType',
+          this.customerTypeService.getAutoCompleteData(res.data),
+          this.autoCompleteData);
       }
     );
   }
@@ -256,7 +260,10 @@ export class CreateCustomerComponent implements OnInit {
   public loadPaymentTermsData(): void {
     this.paymentTermsService.fetchAllActive().subscribe(
       (res: ApiResponse) => {
-        this.updateAutoCompleteDataModel('paymentTerms', this.paymentTermsService.getAutoCompleteData(res.data));
+        OwerpFormHelper.updateAutoCompleteDataModel(
+          'paymentTerms',
+          this.paymentTermsService.getAutoCompleteData(res.data),
+          this.autoCompleteData);
       }
     );
   }
@@ -264,7 +271,10 @@ export class CreateCustomerComponent implements OnInit {
   public loadPaymentMethodsData(): void {
     this.paymentMethodsService.fetchAllActive().subscribe(
       (res: ApiResponse) => {
-        this.updateAutoCompleteDataModel('paymentMethod', this.paymentMethodsService.getAutoCompleteData(res.data));
+        OwerpFormHelper.updateAutoCompleteDataModel(
+          'paymentMethod',
+          this.paymentMethodsService.getAutoCompleteData(res.data),
+          this.autoCompleteData);
       }
     );
   }
@@ -272,18 +282,14 @@ export class CreateCustomerComponent implements OnInit {
   public loadLedgerData(): void {
     this.ledgerService.fetchActive().subscribe(
       (res: ApiResponse) => {
-        this.updateAutoCompleteDataModel(
+        OwerpFormHelper.updateAutoCompleteDataModel(
           'controlAccount',
-          this.ledgerService.getLedgerAccountAutoCompleteData(res.data));
+          this.ledgerService.getLedgerAccountAutoCompleteData(res.data),
+          this.autoCompleteData);
       }
     );
   }
 
-  private updateAutoCompleteDataModel(name: string, data: OwerpLabelValueModel[]): void {
-    const model: OwerpAutoCompleteDataModel = this.autoCompleteData;
-    model[name] = data;
-    this.autoCompleteData = Object.assign({}, this.autoCompleteData);
-  }
 
   // </editor-fold>
 

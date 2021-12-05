@@ -9,6 +9,8 @@ import {ActionModule} from '../../@control/action/action.module';
 import { CreateSalesInvoiceComponent } from './create-sales-invoice/create-sales-invoice.component';
 import {NbButtonModule, NbCardModule, NbStepperModule} from '@nebular/theme';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { AddItemComponent } from './create-sales-invoice/add-item/add-item.component';
+import {CreateSalesInvoiceService} from './create-sales-invoice/create-sales-invoice.service';
 
 
 
@@ -16,7 +18,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   declarations: [
     SalesInvoiceComponent,
     ListSalesInvoiceComponent,
-    CreateSalesInvoiceComponent
+    CreateSalesInvoiceComponent,
+    AddItemComponent
   ],
   imports: [
     CommonModule,
@@ -29,6 +32,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ReactiveFormsModule,
     NbButtonModule,
     FormsModule
-  ]
+  ],
+  providers: [CreateSalesInvoiceService]
 })
 export class SalesInvoiceModule { }

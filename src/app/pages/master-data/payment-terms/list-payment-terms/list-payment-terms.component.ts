@@ -37,7 +37,7 @@ export class ListPaymentTermsComponent implements OnInit {
 
   public data: any[] = [];
 
-  constructor(private service: TaxTypesService,
+  constructor(private service: PaymentTermsService,
               private router: Router) {
   }
 
@@ -47,7 +47,7 @@ export class ListPaymentTermsComponent implements OnInit {
 
   private viewDetails(data: any[]): void {
     const id: string = data[0]['id'];
-    this.router.navigateByUrl('/pages/master-data/tax-types/' + id);
+    this.router.navigateByUrl('/pages/master-data/payment-terms/' + id);
   }
 
   private loadData(): void {
@@ -59,7 +59,7 @@ export class ListPaymentTermsComponent implements OnInit {
   }
 
   public createMethod(): void {
-    this.router.navigateByUrl('/pages/master-data/tax-types/create');
+    this.router.navigateByUrl('/pages/master-data/payment-terms/create');
   }
 
 }

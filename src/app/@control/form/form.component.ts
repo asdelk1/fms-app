@@ -161,7 +161,12 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
     if (this.autoCompleteData && this.autoCompleteData[field.name]) {
       filteredOptions = this.autoCompleteData[field.name]
         .filter((option: OwerpLabelValueModel) => {
-          return value && typeof value === 'string' ? option.label.toLowerCase().includes(value.toLowerCase()) : false;
+          if (!value) {
+            return true;
+          }
+
+          const label: string = `${option.label}`;
+          return label.toLowerCase().includes(value.toLowerCase());
         });
       const emitter: Subject<OwerpLabelValueModel[]> = this.getAutoCompleteOptionChangeEmitter(field.name);
       emitter.next(filteredOptions);

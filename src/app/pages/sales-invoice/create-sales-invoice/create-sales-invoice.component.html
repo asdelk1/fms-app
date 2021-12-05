@@ -6,7 +6,7 @@
         <ng-template #labelOne>Customer</ng-template>
 
 
-          <ngx-owerp-form
+        <ngx-owerp-form
           title=""
           [fields]="customerFields"
           [data]="data"
@@ -18,14 +18,29 @@
           [autoCompleteData]="stepOneAutocompleteData"
           [enumData]="stepOneEnumData"
           (saveData)="addCustomer($event)"
-          ></ngx-owerp-form>
+        ></ngx-owerp-form>
       </nb-step>
 
-      <nb-step [label]="labelTwo">
-        <ng-template #labelTwo>Items</ng-template>
-        <h3>Step content #2</h3>
+      <nb-step label="Items">
+
+        <ngx-owerp-table
+          title=""
+          [columns]="itemTableCols"
+          [data]="items"
+          (create)="addItem()"
+          [hideCard]="true"
+        ></ngx-owerp-table>
+
+        <ngx-owerp-form
+          [fields]="itemSummaryFields"
+          [data]="itemSummaryData"
+          [showCard]="false"
+          [canEdit]="false"
+        ></ngx-owerp-form>
+
+
         <button nbButton nbStepperPrevious>prev</button>
-        <button nbButton nbStepperNext>next</button>
+        <button nbButton nbStepperNext [status]="'info'">next</button>
       </nb-step>
       <nb-step label="Summary">
         <h3>Step content #3</h3>
