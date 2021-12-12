@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {OwerpTableColumns, OwerpTableColumnType} from '../../../@control/table/owerp-table.model';
+import {Component, OnInit} from '@angular/core';
+import {OwerpSelectionMode, OwerpTableColumns, OwerpTableColumnType} from '../../../@control/table/owerp-table.model';
 import {SalesInvoiceService} from '../sales-invoice.service';
 import {ApiResponse} from '../../../model/api-model';
 import {Router} from '@angular/router';
+import {OwerpActionModel} from '../../../@control/action/owerp-action.model';
 
 @Component({
   selector: 'ngx-owerp-list-sales-invoice',
@@ -17,6 +18,15 @@ export class ListSalesInvoiceComponent implements OnInit {
     invoiceDate: {title: 'Invoice Date', type: OwerpTableColumnType.TEXT},
     totalAmount: {title: 'Amount', type: OwerpTableColumnType.TEXT}
   };
+
+  public actions: OwerpActionModel[] = [
+    {
+      name: 'viewInvoiceDetails',
+      label: 'Details',
+      execute: this.viewInvoiceDetails.bind(this),
+      mode: OwerpSelectionMode.SINGLE
+    }
+  ];
 
   public data: any[] = [];
 
@@ -42,6 +52,11 @@ export class ListSalesInvoiceComponent implements OnInit {
 
   public createNewSalesInvoice(): void {
     this.router.navigateByUrl('/pages/sales-invoices/create');
+  }
+
+  private viewInvoiceDetails(rows: any[]): void {
+    const id: string = rows[0]['id'];
+    this.router.navigateByUrl('/pages/sales-invoices/' + id);
   }
 
 }

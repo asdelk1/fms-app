@@ -17,6 +17,10 @@ export class SalesInvoiceService {
     return this.provider.get(this.baseURL);
   }
 
+  public fetch(id: string): Observable<ApiResponse> {
+    return this.provider.get(this.baseURL + '/' + id);
+  }
+
   public fetchInvoiceNo(customerTypeId: string, salesInvoiceId: string): Observable<ApiResponse> {
     const url: string = `${this.baseURL}/${customerTypeId}/${salesInvoiceId}/invoice-no`;
     return this.provider.get(url);
