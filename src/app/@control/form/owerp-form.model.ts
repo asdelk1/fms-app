@@ -7,7 +7,7 @@ export interface OwerpFormModel {
   required?: boolean;
   autoComplete?: string;
   groupName?: string;
-  valueChange?: (data: any) => void;
+  valueChange?: (data: any, state?: any) => void;
 }
 
 export interface OwerpAutoCompleteDataModel {

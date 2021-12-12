@@ -32,7 +32,6 @@ import {CreateSalesInvoiceService} from './create-sales-invoice/create-sales-inv
     ReactiveFormsModule,
     NbButtonModule,
     FormsModule
-  ],
-  providers: [CreateSalesInvoiceService]
+  ]
 })
 export class SalesInvoiceModule { }

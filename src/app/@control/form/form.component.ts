@@ -81,24 +81,19 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
       this.fields.forEach((f: OwerpFormModel) => {
         const data: any = this.getData(f);
         const control: FormControl = this.fb.control(data, f.required ? Validators.required : undefined);
-        if (f.type === OwerpFormFieldType.AUTOCOMPLETE) {
-          this.autoCompleteOptionsChanges[f.name] = new Subject<OwerpLabelValueModel[]>();
-          control.valueChanges.pipe(
-            takeUntil(this.stopAutoCompleteListeners.asObservable())
-          ).subscribe(
-            (value: string) => {
+        this.autoCompleteOptionsChanges[f.name] = new Subject<OwerpLabelValueModel[]>();
+        control.valueChanges.pipe(
+          takeUntil(this.stopAutoCompleteListeners.asObservable())
+        ).subscribe(
+          (value: string) => {
+            if (f.type === OwerpFormFieldType.AUTOCOMPLETE) {
               this.filterAutoComplete(f, value);
+            } else if (f.valueChange) {
+              f.valueChange(value, this.formGroup.value);
             }
-          );
+          }
+        );
 
-          //   const obj: any | null = this.data[f.name] ? this.data[f.name] : null;
-          //   if (obj !== null) {
-          //     const id: string = obj[f.autoComplete.value];
-          //     if (id) {
-          //       control.setValue(id);
-          //     }
-          //   }
-        }
         formControls[f.name] = control;
       });
       this.formGroup = this.fb.group(formControls);
@@ -156,7 +151,7 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
     this.cancelForm.emit();
   }
 
-  private filterAutoComplete(field: OwerpFormModel, value: string): OwerpLabelValueModel[] {
+  private filterAutoComplete(field: OwerpFormModel, value: any): OwerpLabelValueModel[] {
     let filteredOptions: OwerpLabelValueModel[] = [];
     if (this.autoCompleteData && this.autoCompleteData[field.name]) {
       filteredOptions = this.autoCompleteData[field.name]
@@ -166,7 +161,8 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
           }
 
           const label: string = `${option.label}`;
-          return label.toLowerCase().includes(value.toLowerCase());
+          const strValue: string = `${value}`;
+          return label.toLowerCase().includes(strValue.toLowerCase());
         });
       const emitter: Subject<OwerpLabelValueModel[]> = this.getAutoCompleteOptionChangeEmitter(field.name);
       emitter.next(filteredOptions);
@@ -204,7 +200,7 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
 
   public onAutoCompleteValueChange(field: OwerpFormModel, data: string): void {
     if (field.valueChange && data !== '') {
-      field.valueChange(data);
+      field.valueChange(data, this.formGroup.value);
     }
   }
 

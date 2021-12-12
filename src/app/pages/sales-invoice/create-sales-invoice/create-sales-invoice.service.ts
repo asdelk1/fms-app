@@ -3,14 +3,17 @@ import {CustomerItemService} from '../../customer/items/customer-item.service';
 import {ApiResponse} from '../../../model/api-model';
 import {TaxGroupsService} from '../../master-data/tax-groups/tax-groups.service';
 import {CostCenterService} from '../../master-data/cost-center/cost-center.service';
+import {OwerpLabelValueModel} from '../../../@control/form/owerp-form.model';
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class CreateSalesInvoiceService {
 
-  public itemsData: any[] = [];
-  public taxData: any[] = [];
-  public costCenterData: any[] = [];
+  public itemsData: OwerpLabelValueModel[] = [];
+  public taxData: OwerpLabelValueModel[] = [];
+  public costCenterData: OwerpLabelValueModel[] = [];
 
   constructor(private customerItemService: CustomerItemService,
               private taxGroupsService: TaxGroupsService,

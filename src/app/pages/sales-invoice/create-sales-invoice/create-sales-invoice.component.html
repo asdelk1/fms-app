@@ -9,7 +9,8 @@
         <ngx-owerp-form
           title=""
           [fields]="customerFields"
-          [data]="data"
+          [data]="customerData"
+          [patchData]="patchData"
           [canEdit]="true"
           [showCard]="false"
           [cancelLabel]="'Prev'"
@@ -26,9 +27,11 @@
         <ngx-owerp-table
           title=""
           [columns]="itemTableCols"
-          [data]="items"
+          [data]="presentationalItems"
           (create)="addItem()"
           [hideCard]="true"
+          [selectionMode]="itemTableSelectionMode"
+          [actions]="itemTableActions"
         ></ngx-owerp-table>
 
         <ngx-owerp-form
@@ -43,9 +46,14 @@
         <button nbButton nbStepperNext [status]="'info'">next</button>
       </nb-step>
       <nb-step label="Summary">
-        <h3>Step content #3</h3>
-        <button nbButton nbStepperPrevious>prev</button>
-        <button nbButton disabled nbStepperNext>next</button>
+        <ngx-owerp-form
+          [fields]="invoiceSummaryField"
+          [data]="invoiceSummaryData"
+          (saveData)="createInvoice($event)"
+          (cancelForm)="cancelInvoiceSummary()"
+          [showCard]="false"
+        ></ngx-owerp-form>
+
       </nb-step>
     </nb-stepper>
   </nb-card-body>

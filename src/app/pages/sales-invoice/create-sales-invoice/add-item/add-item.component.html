@@ -1,8 +1,19 @@
-<ngx-owerp-form
-[fields]="fields"
-[data]="data"
-[canEdit]="true"
-title="Add Item"
-(cancelForm)="cancel()"
-(saveData)="addItem($event)"
-></ngx-owerp-form>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <ngx-owerp-form
+        [fields]="fields"
+        [data]="data"
+        [patchData]="patchData"
+        [autoCompleteData]="autoCompleteData"
+        [canEdit]="true"
+        title="Add Item"
+        (cancelForm)="cancel()"
+        (saveData)="addItem($event)"
+        saveLabel="Add"
+      ></ngx-owerp-form>
+    </div>
+  </div>
+</div>
+
+
