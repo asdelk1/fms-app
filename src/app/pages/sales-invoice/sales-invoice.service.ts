@@ -25,6 +25,10 @@ export class SalesInvoiceService {
     return this.provider.get(this.baseURL + '/to-check');
   }
 
+  public fetchAllToApprove(): Observable<ApiResponse> {
+    return this.provider.get(this.baseURL + '/to-approve');
+  }
+
   public fetchInvoiceNo(customerTypeId: string, salesInvoiceId: string): Observable<ApiResponse> {
     const url: string = `${this.baseURL}/${customerTypeId}/${salesInvoiceId}/invoice-no`;
     return this.provider.get(url);
@@ -65,4 +69,28 @@ export class SalesInvoiceService {
     const url: string = `${this.baseURL}/${invoiceId}/reject`;
     return this.provider.post(url, body);
   }
+
+  public approve(invoiceId: string, data?: string): Observable<ApiResponse> {
+    const body: any = {
+      invoiceId: +invoiceId,
+      note: data['note'],
+      sendEmail: data['sendEmail']
+    };
+
+    const url: string = `${this.baseURL}/${invoiceId}/approve`;
+    return this.provider.post(url, body);
+  }
+
+  public removeApproval(invoiceId: string, data?: string): Observable<ApiResponse> {
+    const body: any = {
+      invoiceId: +invoiceId,
+      note: data['note'],
+      sendEmail: data['sendEmail']
+    };
+
+    const url: string = `${this.baseURL}/${invoiceId}/remove-approval`;
+    return this.provider.post(url, body);
+  }
+
+
 }

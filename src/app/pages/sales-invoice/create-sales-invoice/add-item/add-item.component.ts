@@ -41,7 +41,7 @@ export class AddItemComponent implements OnInit {
     {
       name: 'unitAmount',
       label: 'Unit Amount',
-      type: OwerpFormFieldType.TEXT,
+      type: OwerpFormFieldType.NUMBER,
       required: true,
       canEdit: true,
       size: OwerpFormFieldSize.SMALL,

@@ -5,7 +5,7 @@ import {ApiResponse} from '../../../model/api-model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {OwerpActionModel} from '../../../@control/action/owerp-action.model';
 import {CheckSalesInvoiceComponent} from '../check-sales-invoice/check-sales-invoice.component';
-import {switchMap} from 'rxjs/operators';
+import {filter, switchMap} from 'rxjs/operators';
 import {NbDialogService} from '@nebular/theme';
 import {UserMessageService} from '../../../services/user-message.service';
 
@@ -38,6 +38,13 @@ export class ListSalesInvoiceComponent implements OnInit {
       visible: (data: any) => this.dataType === 'normal'
     },
     {
+      name: 'viewInvoicesToApprove',
+      label: 'Invoices To Approve',
+      execute: this.viewInvoicesToApprove.bind(this),
+      mode: OwerpSelectionMode.NONE,
+      visible: (data: any) => this.dataType === 'normal'
+    },
+    {
       name: 'checkInvoice',
       label: 'Check',
       execute: this.checkInvoice.bind(this),
@@ -52,6 +59,22 @@ export class ListSalesInvoiceComponent implements OnInit {
       mode: OwerpSelectionMode.SINGLE,
       status: 'danger',
       visible: (data: any) => this.dataType === 'to-check'
+    },
+    {
+      name: 'approveInvoice',
+      label: 'Approve',
+      execute: this.approveInvoice.bind(this),
+      mode: OwerpSelectionMode.SINGLE,
+      status: 'success',
+      visible: (data: any) => this.dataType === 'to-approve'
+    },
+    {
+      name: 'rejectInvoice',
+      label: 'Reject',
+      execute: this.removeApproval.bind(this),
+      mode: OwerpSelectionMode.SINGLE,
+      status: 'danger',
+      visible: (data: any) => this.dataType === 'to-approve'
     }
 
   ];
@@ -84,6 +107,10 @@ export class ListSalesInvoiceComponent implements OnInit {
       this.title = 'Sales Invoices - To Check';
       this.canCreate = false;
       this.loadToCheck();
+    } else if (this.dataType === 'to-approve') {
+      this.title = 'Sales Invoices - To Approve';
+      this.canCreate = false;
+      this.loadToApprove();
     }
   }
 
@@ -95,6 +122,10 @@ export class ListSalesInvoiceComponent implements OnInit {
 
   private loadToCheck(): void {
     this.service.fetchAllToCheck().subscribe(this.populateData.bind(this));
+  }
+
+  private loadToApprove(): void {
+    this.service.fetchAllToApprove().subscribe(this.populateData.bind(this));
   }
 
   public createNewSalesInvoice(): void {
@@ -118,11 +149,16 @@ export class ListSalesInvoiceComponent implements OnInit {
     this.router.navigateByUrl('/pages/sales-invoices/to-check');
   }
 
+  private viewInvoicesToApprove(): void {
+    this.router.navigateByUrl('/pages/sales-invoices/to-approve');
+  }
+
   private checkInvoice(data: any): void {
-    this.dialogService.open(CheckSalesInvoiceComponent).onClose.pipe(
+    this.dialogService.open(CheckSalesInvoiceComponent, {context: {title: 'Check Invoice'}}).onClose.pipe(
+      filter((value: any) => value !== undefined),
       switchMap(
-        (value: string, index: number) => {
-          return this.service.check(data[0].id, value);
+        (value: any, index: number) => {
+          return this.service.check(data[0].id, value['note']);
         })
     ).subscribe(
       (res: ApiResponse) => {
@@ -133,10 +169,41 @@ export class ListSalesInvoiceComponent implements OnInit {
   }
 
   private rejectInvoice(data: any): void {
-    this.dialogService.open(CheckSalesInvoiceComponent).onClose.pipe(
+    this.dialogService.open(CheckSalesInvoiceComponent, {context: {title: 'Reject Invoice'}}).onClose.pipe(
+      filter((value: any) => value !== undefined),
       switchMap(
         (value: string, index: number) => {
-          return this.service.reject(data[0].id, value);
+          return this.service.reject(data[0].id, value['note']);
+        })
+    ).subscribe(
+      (res: ApiResponse) => {
+        this.ums.success(`Sales Invoice ${res.data['invoiceNumber']} rejected successfully.`);
+        this.loadToCheck();
+      }
+    );
+  }
+
+  private approveInvoice(data: any): void {
+    this.dialogService.open(CheckSalesInvoiceComponent, {context: {title: 'Approve Invoice'}}).onClose.pipe(
+      filter((value: any) => value !== undefined),
+      switchMap(
+        (value: string, index: number) => {
+          return this.service.approve(data[0].id, value);
+        })
+    ).subscribe(
+      (res: ApiResponse) => {
+        this.ums.success(`Sales Invoice ${res.data['invoiceNumber']} approved successfully.`);
+        this.loadToCheck();
+      }
+    );
+  }
+
+  private removeApproval(data: any): void {
+    this.dialogService.open(CheckSalesInvoiceComponent, {context: {title: 'Reject Invoice'}}).onClose.pipe(
+      filter((value: any) => value !== undefined),
+      switchMap(
+        (value: string, index: number) => {
+          return this.service.removeApproval(data[0].id, value);
         })
     ).subscribe(
       (res: ApiResponse) => {

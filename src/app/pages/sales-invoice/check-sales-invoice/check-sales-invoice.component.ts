@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {OwerpFormFieldSize, OwerpFormFieldType, OwerpFormModel} from '../../../@control/form/owerp-form.model';
 import {NbDialogRef} from '@nebular/theme';
 
@@ -9,9 +9,19 @@ import {NbDialogRef} from '@nebular/theme';
 })
 export class CheckSalesInvoiceComponent implements OnInit {
 
+  @Input()
   public title: string = 'Check Sales Invoice';
+  @Input()
+  public showEmail: boolean = false;
   public fields: OwerpFormModel[] = [
-    {name: 'note', canEdit: true, type: OwerpFormFieldType.TEXT, label: 'Note', size: OwerpFormFieldSize.LARGE}
+    {name: 'note', canEdit: true, type: OwerpFormFieldType.TEXT, label: 'Note', size: OwerpFormFieldSize.LARGE},
+    {
+      name: 'sendEmail',
+      canEdit: true,
+      type: OwerpFormFieldType.BOOLEAN,
+      label: 'Send Email',
+      size: OwerpFormFieldSize.LARGE
+    }
   ];
   public data: any = {};
 
@@ -22,7 +32,11 @@ export class CheckSalesInvoiceComponent implements OnInit {
   }
 
   public onSave(data: any): void {
-    this.dialogService.close(data['note']);
+    this.dialogService.close(data);
+  }
+
+  public onCancel(): void {
+    this.dialogService.close();
   }
 
 }
