@@ -6,8 +6,9 @@ import {ViewSalesInvoiceComponent} from './view-sales-invoice/view-sales-invoice
 
 const routes: Routes = [
   {path: 'create', component: CreateSalesInvoiceComponent},
+  {path: 'to-check', component: ListSalesInvoiceComponent, data: {type: 'to-check'}},
   {path: ':id', component: ViewSalesInvoiceComponent},
-  {path: '', component: ListSalesInvoiceComponent}
+  {path: '', component: ListSalesInvoiceComponent, data: {type: 'normal'}},
 ];
 
 @NgModule({

@@ -21,6 +21,10 @@ export class SalesInvoiceService {
     return this.provider.get(this.baseURL + '/' + id);
   }
 
+  public fetchAllToCheck(): Observable<ApiResponse> {
+    return this.provider.get(this.baseURL + '/to-check');
+  }
+
   public fetchInvoiceNo(customerTypeId: string, salesInvoiceId: string): Observable<ApiResponse> {
     const url: string = `${this.baseURL}/${customerTypeId}/${salesInvoiceId}/invoice-no`;
     return this.provider.get(url);
@@ -40,5 +44,15 @@ export class SalesInvoiceService {
 
   public save(data: any): Observable<ApiResponse> {
     return this.provider.post(this.baseURL, data);
+  }
+
+  public check(invoiceId: string, message?: string): Observable<ApiResponse> {
+    const body: any = {
+      invoiceId: +invoiceId,
+      note: message
+    };
+
+    const url: string = `${this.baseURL}/${invoiceId}/check`;
+    return this.provider.post(url, body);
   }
 }

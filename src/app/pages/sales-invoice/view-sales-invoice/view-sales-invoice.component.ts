@@ -4,6 +4,12 @@ import {OwerpFormFieldSize, OwerpFormFieldType, OwerpFormModel} from '../../../@
 import {ActivatedRoute} from '@angular/router';
 import {ApiResponse} from '../../../model/api-model';
 import {OwerpSelectionMode, OwerpTableColumns, OwerpTableColumnType} from '../../../@control/table/owerp-table.model';
+import {OwerpActionModel} from '../../../@control/action/owerp-action.model';
+import {NbDialogService} from '@nebular/theme';
+import {CheckSalesInvoiceComponent} from '../check-sales-invoice/check-sales-invoice.component';
+import {switchMap} from 'rxjs/operators';
+import {UserMessageService} from '../../../services/user-message.service';
+
 
 @Component({
   selector: 'ngx-owerp-view-sales-invoice',
@@ -26,7 +32,6 @@ export class ViewSalesInvoiceComponent implements OnInit {
     {name: 'message', label: 'Message', type: OwerpFormFieldType.TEXT, canEdit: false, size: OwerpFormFieldSize.LARGE}
   ];
   public detailsData: any = {};
-
   //endregion
 
   //region Items Details
@@ -108,10 +113,12 @@ export class ViewSalesInvoiceComponent implements OnInit {
     }
   ];
   public authData: any = {};
+
   //endregion
 
   constructor(private service: SalesInvoiceService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute
+             ) {
   }
 
   ngOnInit(): void {

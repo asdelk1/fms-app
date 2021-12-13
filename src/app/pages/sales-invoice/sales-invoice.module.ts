@@ -11,6 +11,7 @@ import {NbButtonModule, NbCardModule, NbStepperModule, NbTabsetModule} from '@ne
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AddItemComponent} from './create-sales-invoice/add-item/add-item.component';
 import {ViewSalesInvoiceComponent} from './view-sales-invoice/view-sales-invoice.component';
+import { CheckSalesInvoiceComponent } from './check-sales-invoice/check-sales-invoice.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {ViewSalesInvoiceComponent} from './view-sales-invoice/view-sales-invoice
     ListSalesInvoiceComponent,
     CreateSalesInvoiceComponent,
     AddItemComponent,
-    ViewSalesInvoiceComponent
+    ViewSalesInvoiceComponent,
+    CheckSalesInvoiceComponent
   ],
   imports: [
     CommonModule,

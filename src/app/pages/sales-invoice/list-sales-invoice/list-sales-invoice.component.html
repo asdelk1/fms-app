@@ -1,7 +1,8 @@
 <ngx-owerp-table
-title="Sales Invoices"
+[title]="title"
 [columns]="cols"
 [data]="data"
 (create)="createNewSalesInvoice()"
 [actions]="actions"
+[disableCreate]="!canCreate"
 ></ngx-owerp-table>
