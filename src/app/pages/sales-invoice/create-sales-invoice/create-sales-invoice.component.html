@@ -43,7 +43,7 @@
 
 
         <button nbButton nbStepperPrevious>prev</button>
-        <button nbButton nbStepperNext [status]="'info'">next</button>
+        <button nbButton nbStepperNext [status]="'info'" [disabled]="items.length == 0">next</button>
       </nb-step>
       <nb-step label="Summary">
         <ngx-owerp-form

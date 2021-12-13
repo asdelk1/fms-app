@@ -9,6 +9,7 @@ import {NbDialogRef} from '@nebular/theme';
 })
 export class CheckSalesInvoiceComponent implements OnInit {
 
+  public title: string = 'Check Sales Invoice';
   public fields: OwerpFormModel[] = [
     {name: 'note', canEdit: true, type: OwerpFormFieldType.TEXT, label: 'Note', size: OwerpFormFieldSize.LARGE}
   ];

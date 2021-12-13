@@ -29,6 +29,7 @@ export class ViewSalesInvoiceComponent implements OnInit {
     {name: 'costCenter', label: 'Cost Center', type: OwerpFormFieldType.TEXT, canEdit: false},
     {name: 'poNumber', label: 'P.O No', type: OwerpFormFieldType.TEXT, canEdit: false},
     {name: 'paymentTerms', label: 'Payment Terms', type: OwerpFormFieldType.TEXT, canEdit: false},
+    {name: 'docApproveType', label: 'Approve Type', type: OwerpFormFieldType.TEXT, canEdit: false},
     {name: 'message', label: 'Message', type: OwerpFormFieldType.TEXT, canEdit: false, size: OwerpFormFieldSize.LARGE}
   ];
   public detailsData: any = {};
@@ -139,6 +140,7 @@ export class ViewSalesInvoiceComponent implements OnInit {
           costCenter: res.data['costCenter']['name'],
           poNumber: res.data['poNumber'],
           paymentTerms: `${res.data['paymentTerms']['description']}(${res.data['paymentTerms']['term']})`,
+          docApproveType: res.data['docApproveType'],
           message: res.data['message']
         };
 

@@ -42,6 +42,15 @@ export class ListSalesInvoiceComponent implements OnInit {
       label: 'Check',
       execute: this.checkInvoice.bind(this),
       mode: OwerpSelectionMode.SINGLE,
+      status: 'success',
+      visible: (data: any) => this.dataType === 'to-check'
+    },
+    {
+      name: 'rejectInvoice',
+      label: 'Reject',
+      execute: this.rejectInvoice.bind(this),
+      mode: OwerpSelectionMode.SINGLE,
+      status: 'danger',
       visible: (data: any) => this.dataType === 'to-check'
     }
 
@@ -118,6 +127,20 @@ export class ListSalesInvoiceComponent implements OnInit {
     ).subscribe(
       (res: ApiResponse) => {
         this.ums.success(`Sales Invoice ${res.data['invoiceNumber']} checked successfully.`);
+        this.loadToCheck();
+      }
+    );
+  }
+
+  private rejectInvoice(data: any): void {
+    this.dialogService.open(CheckSalesInvoiceComponent).onClose.pipe(
+      switchMap(
+        (value: string, index: number) => {
+          return this.service.reject(data[0].id, value);
+        })
+    ).subscribe(
+      (res: ApiResponse) => {
+        this.ums.success(`Sales Invoice ${res.data['invoiceNumber']} rejected successfully.`);
         this.loadToCheck();
       }
     );

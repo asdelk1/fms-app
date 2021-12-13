@@ -55,4 +55,14 @@ export class SalesInvoiceService {
     const url: string = `${this.baseURL}/${invoiceId}/check`;
     return this.provider.post(url, body);
   }
+
+  public reject(invoiceId: string, message?: string): Observable<ApiResponse> {
+    const body: any = {
+      invoiceId: +invoiceId,
+      note: message
+    };
+
+    const url: string = `${this.baseURL}/${invoiceId}/reject`;
+    return this.provider.post(url, body);
+  }
 }
