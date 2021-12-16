@@ -29,7 +29,7 @@ export class TableComponent implements OnInit, OnChanges {
   public actions: OwerpActionModel[];
 
   @Input()
-  public selectionMode: OwerpSelectionMode.SINGLE | OwerpSelectionMode.MULTI = OwerpSelectionMode.SINGLE;
+  public selectionMode: OwerpSelectionMode = OwerpSelectionMode.SINGLE;
 
   @Input()
   public hideCard: boolean = false;
@@ -93,16 +93,30 @@ export class TableComponent implements OnInit, OnChanges {
 
   public isVisible(model: OwerpActionModel): boolean {
 
+    if (!model.mode) {
+      return false;
+    }
+
+    let isMatchedSelectionType: boolean;
+    let result: boolean;
+
     if (model.mode && model.mode === OwerpSelectionMode.NONE) {
-      return true;
+      isMatchedSelectionType = true;
     }
 
     if (model.mode === 'single') {
-      return this.selectedRecords.length === 1;
-    } else if (model.visible !== undefined) {
-      return model.visible(this.selectedRecords);
+      isMatchedSelectionType = this.selectedRecords.length === 1;
+    } else if (model.mode === 'multi') {
+      isMatchedSelectionType = this.selectedRecords.length >= 1;
     }
-    return true;
+
+    if (isMatchedSelectionType) {
+      result = model.visible ? model.visible({}) : isMatchedSelectionType;
+    } else {
+      result = false;
+    }
+
+    return result;
   }
 
   private getTableColumns(): { [columnName: string]: any } {

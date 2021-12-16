@@ -1,0 +1,62 @@
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+  <nb-card-header>Create Invoice</nb-card-header>
+  <nb-card-body>
+    <nb-stepper #createSaleInvoiceStepper orientation="horizontal">
+      <nb-step [label]="labelOne">
+        <ng-template #labelOne>Customer</ng-template>
+
+
+        <ngx-owerp-form
+          title=""
+          [fields]="customerFields"
+          [data]="customerData"
+          [patchData]="patchData"
+          [canEdit]="true"
+          [showCard]="false"
+          [cancelLabel]="'Prev'"
+          [saveLabel]="'Next'"
+          [disableCancel]="true"
+          [autoCompleteData]="stepOneAutocompleteData"
+          [enumData]="stepOneEnumData"
+          (saveData)="addCustomer($event)"
+        ></ngx-owerp-form>
+      </nb-step>
+
+      <nb-step label="Items">
+
+        <ngx-owerp-table
+          title=""
+          [columns]="itemTableCols"
+          [data]="presentationalItems"
+          (create)="addItem()"
+          [hideCard]="true"
+          [selectionMode]="itemTableSelectionMode"
+          [actions]="itemTableActions"
+        ></ngx-owerp-table>
+
+        <ngx-owerp-form
+          [fields]="itemSummaryFields"
+          [data]="itemSummaryData"
+          [showCard]="false"
+          [canEdit]="false"
+        ></ngx-owerp-form>
+
+
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton nbStepperNext [status]="'info'" [disabled]="items.length == 0">next</button>
+      </nb-step>
+      <nb-step label="Summary">
+        <ngx-owerp-form
+          [fields]="invoiceSummaryField"
+          [data]="invoiceSummaryData"
+          (saveData)="createInvoice($event)"
+          (cancelForm)="cancelInvoiceSummary()"
+          [showCard]="false"
+        ></ngx-owerp-form>
+
+      </nb-step>
+    </nb-stepper>
+  </nb-card-body>
+</nb-card>
+
+

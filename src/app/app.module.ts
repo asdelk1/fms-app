@@ -22,6 +22,7 @@ import {
 } from '@nebular/theme';
 import {AuthInterceptor} from './interceptors/auth-interceptor';
 import {HttpErrorInterceptor} from './interceptors/http-error-interceptor';
+import {OwerpFormModule} from './@control/form/owerp-form.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +35,7 @@ import {HttpErrorInterceptor} from './interceptors/http-error-interceptor';
     NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),
     NbDialogModule.forRoot(),
+    OwerpFormModule,
     NbWindowModule.forRoot(),
     NbToastrModule.forRoot(),
     NbChatModule.forRoot({

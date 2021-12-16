@@ -42,7 +42,7 @@ export class ViewTaxTypesComponent implements OnInit {
       type: OwerpFormFieldType.AUTOCOMPLETE,
       label: 'Ledger Control Account',
       size: OwerpFormFieldSize.SMALL,
-      autoComplete: {value: 'id', label: 'ledgerAccCode'}
+      autoComplete: 'id'
     }
   ];
 
@@ -119,7 +119,7 @@ export class ViewTaxTypesComponent implements OnInit {
   private fetchLedgerAccount(): void {
     this.lac.fetchActive().subscribe(
       (res: ApiResponse) => {
-        this.autoCompleteData['controlAccount'] = res.data;
+        this.autoCompleteData['controlAccount'] = this.lac.getLedgerAccountAutoCompleteData(res.data);
         this.autoCompleteData = Object.assign({}, this.autoCompleteData);
       }
     );

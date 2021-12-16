@@ -33,4 +33,13 @@ export class TaxTypesService {
   public update(id: string, data: any): Observable<ApiResponse> {
     return this.provider.put(`${this.baseURL}/${id}`, data);
   }
+
+  public getAutocompleteData(data: any[]): OwerpLabelValueModel[] {
+    return data.map((d: any) => {
+      return {
+        value: d['id'],
+        label: d['taxCode']
+      };
+    });
+  }
 }

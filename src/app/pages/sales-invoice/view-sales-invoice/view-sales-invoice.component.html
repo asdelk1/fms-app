@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-lg-12">
+    <nb-tabset>
+      <nb-tab tabTitle="Invoice Details">
+        <ngx-owerp-form
+          [fields]="detailsFields"
+          [data]="detailsData"
+          [canEdit]="false"
+          [showCard]="true"
+        ></ngx-owerp-form>
+      </nb-tab>
+      <nb-tab tabTitle="Items">
+
+        <ngx-owerp-table
+          [columns]="itemTableCols"
+          [data]="items"
+          [hideCard]="false"
+          [selectionMode]="itemTableSelectionMode"
+          [disableCreate]="true"
+        ></ngx-owerp-table>
+
+        <ngx-owerp-form
+          [fields]="itemSummaryFields"
+          [data]="itemSummaryData"
+          [showCard]="true"
+          [canEdit]="false"
+        ></ngx-owerp-form>
+
+      </nb-tab>
+      <nb-tab tabTitle="Authorization">
+
+        <ngx-owerp-form
+          [canEdit]="false"
+          [fields]="authFields"
+          [showCard]="true"
+          [data]="authData"
+        ></ngx-owerp-form>
+      </nb-tab>
+
+    </nb-tabset>
+  </div>
+</div>
+
+
+

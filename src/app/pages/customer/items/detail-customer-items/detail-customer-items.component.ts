@@ -26,7 +26,7 @@ export class DetailCustomerItemsComponent implements OnInit {
       canEdit: true,
       type: OwerpFormFieldType.AUTOCOMPLETE,
       label: 'Customer Type',
-      autoComplete: {label: 'customerType', value: 'id'}
+      autoComplete: 'id'
     },
     {
       name: 'itemName',
@@ -55,7 +55,7 @@ export class DetailCustomerItemsComponent implements OnInit {
       type: OwerpFormFieldType.AUTOCOMPLETE,
       label: 'Ledger Control Account',
       size: OwerpFormFieldSize.SMALL,
-      autoComplete: {label: 'ledgerAccountCodeName', value: 'id'}
+      autoComplete: 'id'
     },
     {
       name: 'formulaType',

@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ProviderService} from '../../../services/provider.service';
 import {Observable} from 'rxjs';
 import {ApiResponse} from '../../../model/api-model';
+import {OwerpLabelValueModel} from '../../../@control/form/owerp-form.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,14 @@ export class CostCenterService {
 
   public update(id: string, type: any): Observable<ApiResponse> {
     return this.providerService.put(`${this.baseURL}/${id}`, type);
+  }
+
+  public getAutoCompleteData(data: any[]): OwerpLabelValueModel[] {
+    return data.map((c: any) => {
+      return {
+        value: c['id'],
+        label: `${c['name']}(${c['code']})`
+      };
+    });
   }
 }
