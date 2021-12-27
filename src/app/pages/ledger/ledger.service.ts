@@ -63,4 +63,15 @@ export class LedgerService {
     );
   }
 
+  public getLedgerAccountCategoryAutoCompleteData(data: any[]): OwerpLabelValueModel[] {
+    return data.map(
+      (la: any) => {
+        return {
+          value: la['id'],
+          label: `${la['accName']}(${la['accCode']})`
+        };
+      }
+    );
+  }
+
 }

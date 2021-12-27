@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-lg-12">
+    <nb-card>
+      <nb-card-header>Create Journal Entry</nb-card-header>
+      <nb-card-body>
+        <nb-stepper #stepper>
+          <nb-step label="Entry Details">
+            <ngx-owerp-form
+              [fields]="entryDetailFields"
+              [data]="detailData"
+              [showCard]="false"
+              [saveLabel]="'Next'"
+              (saveData)="addDetails($event)"
+              [disableCancel]="true">
+            </ngx-owerp-form>
+          </nb-step>
+
+          <nb-step label="Accounts">
+
+            <ngx-owerp-table
+              [columns]="accountColumns"
+              [data]="accountTableData"
+              [hideCard]="true"
+              (create)="addAccount()"
+              [actions]="accountTableActions"
+            ></ngx-owerp-table>
+
+            <ngx-owerp-form
+              [fields]="accountSummaryFields"
+              [data]="accountSummaryData"
+              [canEdit]="false"
+              [showCard]="false"
+            ></ngx-owerp-form>
+
+            <button nbButton nbStepperPrevious>prev</button>
+            <button nbButton nbStepperNext [status]="'info'" [disabled]="!accountData || accountData.length <= 0">next
+            </button>
+          </nb-step>
+          <nb-step label="Summary">
+
+            <ngx-owerp-form
+              [fields]="entrySummaryFields"
+              [data]="entrySummaryData"
+              [canEdit]="true"
+              [showCard]="false"
+              (saveData)="saveJournalEntry($event)"
+              (cancelForm)="cancelSummary()"
+            ></ngx-owerp-form>
+
+            <!--            <button nbButton nbStepperPrevious>prev</button>-->
+            <!--            <button nbButton nbStepperNext [status]="'info'">next</button>-->
+          </nb-step>
+        </nb-stepper>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+
+

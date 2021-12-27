@@ -34,4 +34,12 @@ export class UserMessageService {
       this.config);
   }
 
+  public warning(message: string): void {
+    this.config['status'] = 'warning';
+    this.toastrService.show(
+      message,
+      'WARNING',
+      this.config);
+  }
+
 }

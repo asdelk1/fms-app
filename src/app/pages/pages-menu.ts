@@ -111,6 +111,11 @@ export const MENU_ITEMS: OwerpMenuItem[] = [
     ]
   },
   {
+    title: 'Accounts', children: [
+      {title: 'Journal Entries', link: '/pages/accounts/journal-entries'}
+    ]
+  },
+  {
     title: 'FEATURES',
     group: true
   },
