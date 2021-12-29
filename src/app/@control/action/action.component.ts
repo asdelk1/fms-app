@@ -13,10 +13,13 @@ export class ActionComponent implements OnInit {
   @Input()
   public data: any | any[];
 
+  public isVisible: boolean;
+
   constructor() {
   }
 
   ngOnInit(): void {
+    this.setVisible();
   }
 
   public onClick(): void {
@@ -25,6 +28,14 @@ export class ActionComponent implements OnInit {
 
   public getStatus(): string {
     return this.settings.status ? this.settings.status : 'basic';
+  }
+
+  public setVisible(): void {
+    if (this.settings.visible === undefined) {
+      this.isVisible = true;
+    } else {
+      this.isVisible = this.settings.visible(this.data);
+    }
   }
 
 }

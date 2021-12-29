@@ -12,8 +12,9 @@ import {AddAccountComponent} from './add-account/add-account.component';
 import {filter} from 'rxjs/operators';
 import {UserMessageService} from '../../../../services/user-message.service';
 import {OwerpActionModel} from '../../../../@control/action/owerp-action.model';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import * as moment from 'moment';
+import {JournalAccount} from '../journal.model';
 
 @Component({
   selector: 'ngx-owerp-create-journal-entry',
@@ -50,7 +51,7 @@ export class CreateJournalEntryComponent implements OnInit {
       size: OwerpFormFieldSize.LARGE
     }
   ];
-  public detailData: any = {};
+  public entryDetails: any = {};
   //endregion
 
   //region Account Details (2nd Step)
@@ -112,18 +113,23 @@ export class CreateJournalEntryComponent implements OnInit {
   public entrySummaryData: any = {};
   //endregion
 
+  private id: number | undefined = undefined;
   private entry: any = {};
 
   constructor(private service: AccountService,
               private dialogService: NbDialogService,
               private ums: UserMessageService,
-              private router: Router) {
+              private router: Router,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.service.fetchJournalEntryNumber().subscribe(
-      (res: ApiResponse) => this.detailData = {entryNumber: res.data['entryNumber']}
-    );
+    if (this.route.snapshot.data['mode'] && this.route.snapshot.data['mode'] === 'update') {
+      this.id = +this.route.snapshot.paramMap.get('id');
+      this.loadEntry(this.id, this.route.snapshot.data['type']);
+    } else {
+      this.loadEntryNumber();
+    }
   }
 
   public addDetails(data: any): void {
@@ -147,8 +153,9 @@ export class CreateJournalEntryComponent implements OnInit {
       .pipe(
         filter((value: any) => value !== undefined && value !== null)
       ).subscribe(
-      (value: any) => {
+      (value: JournalAccount) => {
         const tableData: any = {
+          id: value['id'],
           ledgerAccount: value['ledgerAccount'].label,
           details: value['memo'],
           debit: value['debitAmount'],
@@ -190,9 +197,22 @@ export class CreateJournalEntryComponent implements OnInit {
     );
   }
 
+  public saveAccounts(): void {
+    if (this.totalDebitAmount !== this.totalCreditAmount) {
+      this.ums.warning('Debit amount must be equals to Credit amount');
+      return;
+    }
+
+    this.stepper.next();
+  }
+
   public saveJournalEntry(summaryData: any): void {
     this.entry = Object.assign(this.entry, summaryData);
     this.entry['bookEntryDetails'] = this.accountData;
+
+    if (this.id) {
+      this.entry['id'] = this.id;
+    }
 
     this.service.createJournalEntry(this.entry).subscribe(
       (res: ApiResponse) => {
@@ -208,7 +228,7 @@ export class CreateJournalEntryComponent implements OnInit {
 
   public removeItem(data: any[]): void {
     const id: number = data[0].id;
-    const index: number = this.accountTableData.findIndex((acc) => acc[id] === id);
+    const index: number = this.accountTableData.findIndex((acc) => acc['id'] === id);
     if (index === -1) {
       return;
     }
@@ -216,8 +236,92 @@ export class CreateJournalEntryComponent implements OnInit {
     this.accountTableData.splice(index, 1);
     this.accountTableData = this.accountTableData.slice();
 
+    // deducting credit and debit amounts
+    const account: any = this.accountData[index];
+    if (account['entryType'] === 'CREDIT') {
+      this.totalCreditAmount -= account['amount'];
+    } else if (account['entryType'] === 'DEBIT') {
+      this.totalDebitAmount -= account['amount'];
+    }
     this.accountData.splice(index, 1);
+    this.accountSummaryData = {
+      totalDebitAmount: this.totalDebitAmount,
+      totalCreditAmount: this.totalCreditAmount
+    };
   }
 
+  public loadEntryNumber(): void {
+    this.service.fetchJournalEntryNumber().subscribe(
+      (res: ApiResponse) => this.entryDetails = {entryNumber: res.data['entryNumber']}
+    );
+  }
+
+  public loadEntry(id: number, type?: string): void {
+    if (type === 'standing') {
+      this.service.fetchStandingEntry(id).subscribe((res: ApiResponse) => {
+        const entry: any = res.data;
+
+        // loading entry details
+        this.entryDetails = {
+          entryNumber: entry['entryNumber'],
+          entryDate: entry['entryDate'],
+          note: entry['note']
+        };
+
+        // load account data
+        const accountData: any[] = [];
+        const accountTableData: any[] = [];
+        entry['bookEntryDetails'].forEach(
+          (detail: any, i: number) => {
+            const data: any = {
+              ledgerAccount: detail['ledgerAccount'],
+              costCenter: detail['costCenter'],
+              details: detail['details']
+            };
+
+            const tableData: any = {
+              id: i,
+              ledgerAccount: `${detail['ledgerAccount']['ledgerAccName']}(${detail['ledgerAccount']['ledgerAccCode']})`,
+              details: detail['details'],
+              costCenter: `${detail['costCenter']['name']}(${detail['costCenter']['code']})`
+            };
+
+            if (detail['entryType'] === 'CREDIT') {
+              this.totalCreditAmount += detail['amount'];
+              tableData['credit'] = detail['amount'];
+            } else {
+              this.totalDebitAmount += detail['amount'];
+              tableData['debit'] = detail['amount'];
+            }
+
+            data['personType'] = detail['personType'];
+            tableData['personType'] = detail['personType'];
+            if (data['personType'] === 'CUSTOMER') {
+              data['customer'] = detail['customer'];
+              tableData['person'] = `${detail['customer']['customerName']} (Customer)`;
+            } else if (data['personType'] === 'SUPPLIER') {
+              data['supplier'] = detail['supplier'];
+              tableData['person'] = `${detail['supplier']['name']} (Supplier)`;
+            }
+            accountData.push(data);
+            accountTableData.push(tableData);
+          }
+        );
+        this.accountIndex = entry['bookEntryDetails'].length;
+        this.accountData = accountData;
+        this.accountTableData = accountTableData;
+        this.accountSummaryData = {
+          totalDebitAmount: this.totalDebitAmount,
+          totalCreditAmount: this.totalCreditAmount
+        };
+
+        // load summary data
+        this.entrySummaryData = {
+          saveAsSje: entry['saveAsSje']
+        };
+
+      });
+    }
+  }
 
 }

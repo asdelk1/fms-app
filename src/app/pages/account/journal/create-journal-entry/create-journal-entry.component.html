@@ -7,7 +7,7 @@
           <nb-step label="Entry Details">
             <ngx-owerp-form
               [fields]="entryDetailFields"
-              [data]="detailData"
+              [data]="entryDetails"
               [showCard]="false"
               [saveLabel]="'Next'"
               (saveData)="addDetails($event)"
@@ -33,7 +33,7 @@
             ></ngx-owerp-form>
 
             <button nbButton nbStepperPrevious>prev</button>
-            <button nbButton nbStepperNext [status]="'info'" [disabled]="!accountData || accountData.length <= 0">next
+            <button nbButton [status]="'info'" [disabled]="!accountData || accountData.length <= 0" (click)="saveAccounts()">Next
             </button>
           </nb-step>
           <nb-step label="Summary">
