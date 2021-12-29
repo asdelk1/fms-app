@@ -114,6 +114,11 @@ const routes: Routes = [{
         .then(m => m.SalesInvoiceModule)
     },
     {
+      path: 'accounts',
+      loadChildren: () => import('./account/account.module')
+        .then(m => m.AccountModule)
+    },
+    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full'

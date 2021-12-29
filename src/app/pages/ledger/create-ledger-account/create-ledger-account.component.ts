@@ -102,7 +102,7 @@ export class CreateLedgerAccountComponent implements OnInit {
   public loadActiveLedgerCategories(): void {
     this.service.fetchActiveLedgerCategories().subscribe(
       (res: ApiResponse) => {
-        this.autoCompleteData = {'ledgerCategory': this.service.getLedgerAccountAutoCompleteData(res.data)};
+        this.autoCompleteData = {'ledgerCategory': this.service.getLedgerAccountCategoryAutoCompleteData(res.data)};
       }
     );
   }

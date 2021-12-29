@@ -1,4 +1,4 @@
-  <button nbButton shape="rectangle" [status]="getStatus()" (click)="onClick()">
+  <button *ngIf="isVisible" nbButton shape="rectangle" [status]="getStatus()" (click)="onClick()">
     <nb-icon *ngIf="settings.icon" [icon]="settings.icon"></nb-icon>
     <span *ngIf="settings.label !== undefined">{{ settings.label}}</span>
   </button>

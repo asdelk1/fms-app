@@ -7,15 +7,17 @@
 
     <div class="row" *ngIf="actions && actions.length > 0">
       <div class="col-lg-12">
-        <div class="buttons-row">
+<!--        <div class="buttons-row">-->
           <div *ngFor="let action of actions">
-          <ngx-owerp-action
-                            [settings]="action"
-                            [data]="selectedRecords"
-                            *ngIf="isVisible(action)"
-          ></ngx-owerp-action>
+            <div class="col-lg-3">
+              <ngx-owerp-action
+                [settings]="action"
+                [data]="selectedRecords"
+                *ngIf="isVisible(action)"
+              ></ngx-owerp-action>
+            </div>
           </div>
-        </div>
+<!--        </div>-->
       </div>
     </div>
 
