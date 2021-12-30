@@ -52,6 +52,11 @@ export class LedgerService {
     return this.provider.put(`${this.baseURL}/${id}`, data);
   }
 
+  public fetchAccountsByCategory(categoryId: string): Observable<ApiResponse> {
+    const url: string = `${this.baseURL}/categories/${categoryId}/accounts`;
+    return this.provider.get(url);
+  }
+
   public getLedgerAccountAutoCompleteData(data: any[]): OwerpLabelValueModel[] {
     return data.map(
       (la: any) => {

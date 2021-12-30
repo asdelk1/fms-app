@@ -1,0 +1,9 @@
+<ngx-owerp-form
+  title="General Ledger - Report"
+  [fields]="fields"
+  [data]="data"
+  saveLabel="Generate Report"
+  (saveData)="generate($event)"
+  (cancelForm)="onCancel()"
+  [autoCompleteData]="autoCompleteData"
+></ngx-owerp-form>
