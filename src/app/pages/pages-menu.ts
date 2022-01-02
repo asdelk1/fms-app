@@ -113,7 +113,8 @@ export const MENU_ITEMS: OwerpMenuItem[] = [
   {
     title: 'Accounts', children: [
       {title: 'Journal Entries', link: '/pages/accounts/journal-entries'},
-      {title: 'General Ledger', link: '/pages/ledger/general-ledger'}
+      {title: 'General Ledger', link: '/pages/ledger/general-ledger'},
+      {title: 'Trail Balance', link: '/pages/ledger/trail-balance'}
     ]
   },
   {

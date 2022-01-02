@@ -7,6 +7,7 @@ import { CreateLedgerCategoryComponent } from './create-ledger-category/create-l
 import {OwerpFormModule} from '../../@control/form/owerp-form.module';
 import { CreateLedgerAccountComponent } from './create-ledger-account/create-ledger-account.component';
 import { CreateGeneralLedgerComponent } from './create-general-ledger-report/create-general-ledger.component';
+import { CreateTrailBalanceComponent } from './create-trail-balance/create-trail-balance.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { CreateGeneralLedgerComponent } from './create-general-ledger-report/cre
     LedgerComponent,
     CreateLedgerCategoryComponent,
     CreateLedgerAccountComponent,
-    CreateGeneralLedgerComponent
+    CreateGeneralLedgerComponent,
+    CreateTrailBalanceComponent
   ],
   imports: [
     CommonModule,

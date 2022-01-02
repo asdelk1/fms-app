@@ -38,7 +38,7 @@ export class CreateGeneralLedgerComponent implements OnInit {
       autoComplete: 'id'
     },
     {
-      name: 'from',
+      name: 'fromDate',
       label: 'From Date',
       size: OwerpFormFieldSize.MEDIUM,
       type: OwerpFormFieldType.DATE,
@@ -46,7 +46,7 @@ export class CreateGeneralLedgerComponent implements OnInit {
       required: true
     },
     {
-      name: 'to',
+      name: 'toDate',
       label: 'To Date',
       size: OwerpFormFieldSize.MEDIUM,
       type: OwerpFormFieldType.DATE,
@@ -69,7 +69,11 @@ export class CreateGeneralLedgerComponent implements OnInit {
   }
 
   public generate(data: any): void {
-    return;
+    this.ledgerService.generateGeneralLedgerReport(data).subscribe(
+      (res: any) => {
+        console.log('General Ledger Report Created');
+      }
+    );
   }
 
   public onCancel(): void {

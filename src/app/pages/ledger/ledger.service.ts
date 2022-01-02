@@ -79,4 +79,12 @@ export class LedgerService {
     );
   }
 
+  public generateGeneralLedgerReport(data: any): Observable<any> {
+    return this.provider.post('/ledger-reports/general-report', data);
+  }
+
+  public generateTrailBalanceReport(data: any): Observable<any> {
+    return this.provider.post('/ledger-reports/trail-balance', data);
+  }
+
 }
