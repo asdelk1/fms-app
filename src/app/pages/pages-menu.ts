@@ -116,6 +116,13 @@ export const MENU_ITEMS: OwerpMenuItem[] = [
     ]
   },
   {
+    title: 'Investments',
+    children: [
+      {title: 'Types',
+      link: '/pages/investments/types'}
+    ]
+  },
+  {
     title: 'FEATURES',
     group: true
   },
