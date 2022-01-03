@@ -17,9 +17,10 @@
       <div *ngFor="let field of fields" [class]="getWidth(field.size)">
         <div class="form-group">
           <label [for]="field.name" class="label">{{field.label}}</label>
-          <input *ngIf="field.type === 'text' || field.type === 'number'" type="text" nbInput
+
+          <input *ngIf="field.type === 'text' || field.type === 'number' || isReadOnlySelect(field)" type="text" nbInput
                  [formControlName]="field.name" fullWidth
-                 [type]="field.type"
+                 [type]="isReadOnlySelect(field) ? 'text' : field.type"
                  [placeholder]="field.label" [readOnly]="!canEdit || (canEdit &&!field.canEdit)">
 
           <div *ngIf="field.type === 'radio'">
@@ -30,6 +31,13 @@
               <nb-radio *ngFor="let radio of getEnumEntries(field)" [value]="radio.value">{{radio.label}}</nb-radio>
 
             </nb-radio-group>
+          </div>
+
+          <div *ngIf="field.type === 'select' && !isReadOnlySelect(field)">
+            <nb-select  [formControl]="formGroup.controls[field.name]" fullWidth>
+              <nb-option *ngFor="let option of getEnumEntries(field)" [value]="option.value">{{option.label}}</nb-option>
+            </nb-select>
+
           </div>
 
           <div *ngIf="field.type === 'autocomplete'">
@@ -62,7 +70,6 @@
             </ng-template>
 
           </div>
-
 
           <div>
             <nb-badge style="position: relative; top: -20%" nbInput

@@ -204,4 +204,10 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  public isReadOnlySelect(field: OwerpFormModel) {
+    if (field.type !== 'select') {
+      return false;
+    }
+    return !this.canEdit || (this.canEdit && !field.canEdit);
+  }
 }
